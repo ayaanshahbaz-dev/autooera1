@@ -1,0 +1,11 @@
+/* App.css — intentionally minimal. All styles live in index.css */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container main {
+  flex: 1;
+}
