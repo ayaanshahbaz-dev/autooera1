@@ -64,9 +64,13 @@ export default function Footer() {
           <p style={{ color: 'var(--text-3)' }}>
             © {year} AutoEra Engineering Studio. All rights reserved.
           </p>
-          <div className="footer-status">
-            <span className="footer-status-dot" />
-            All systems operational
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+            <div style={{ color: 'var(--text-3)', fontSize: '0.8rem', fontFamily: 'SF Mono, monospace' }}>Last Updated: July 2026</div>
+            <div style={{ color: 'var(--text-3)', fontSize: '0.8rem', fontFamily: 'SF Mono, monospace' }}>Version: v2.1</div>
+            <div className="footer-status" style={{ color: 'var(--accent)' }}>
+              <span className="footer-status-dot" style={{ background: 'var(--accent)', boxShadow: '0 0 8px var(--accent-glow)' }} />
+              Active Development
+            </div>
           </div>
         </div>
       </div>

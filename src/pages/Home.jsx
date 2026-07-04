@@ -109,29 +109,57 @@ export default function Home() {
       <div className="blueprint-grid" />
       
       {/* ================= HERO ================= */}
-      <section style={{ paddingTop: 'calc(var(--nav-h) + 120px)', paddingBottom: '80px' }}>
+      <section style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', paddingTop: 'var(--nav-h)', paddingBottom: '80px' }}>
         <div className="container">
           <div className="reveal">
-            <span style={{ display: 'inline-block', fontSize: '1.1rem', color: 'var(--text-2)', marginBottom: '16px' }}>Software Systems for Growing Businesses</span>
-            <h1 style={{ maxWidth: '950px', marginBottom: '32px' }}>
+            <span style={{ display: 'inline-block', fontSize: '1.2rem', color: 'var(--text-2)', marginBottom: '24px' }}>Software Systems for Growing Businesses</span>
+            <h1 style={{ maxWidth: '1000px', marginBottom: '40px', fontSize: 'clamp(3.5rem, 7vw, 5.5rem)' }}>
               We engineer software systems around your business, not the other way around.
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--text-2)', maxWidth: '650px', marginBottom: '48px', lineHeight: 1.8 }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-2)', maxWidth: '650px', marginBottom: '60px', lineHeight: 1.8 }}>
               We don't build generic chatbots. We architect mission-critical infrastructure, custom software, and intelligent pipelines that scale your operations autonomously.
             </p>
             
             <div style={{ display: 'flex', gap: '16px' }}>
-              <Link to="/contact" className="btn btn-primary" style={{ padding: '0 32px', height: '48px' }}>
+              <Link to="/contact" className="btn btn-primary" style={{ padding: '0 40px', height: '56px', fontSize: '1.05rem' }}>
                 Book Discovery Call
               </Link>
-              <Link to="/solutions" className="btn btn-outline" style={{ padding: '0 32px', height: '48px' }}>
-                Explore Systems
+              <Link to="/solutions" className="btn btn-outline" style={{ padding: '0 40px', height: '56px', fontSize: '1.05rem' }}>
+                Explore Architecture
               </Link>
             </div>
           </div>
 
-          <div className="reveal" style={{ transitionDelay: '200ms' }}>
+          <div className="reveal" style={{ transitionDelay: '200ms', marginTop: '80px' }}>
             <SystemShowcase />
+          </div>
+        </div>
+      </section>
+
+      {/* ================= LIVE SYSTEM STATUS ================= */}
+      <section style={{ padding: '80px 0', borderTop: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
+        <div className="container" style={{ maxWidth: '900px' }}>
+          <div className="reveal" style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h2 style={{ fontSize: '1.5rem', margin: 0 }}>AutoEra Systems</h2>
+            <Link to="/demo" style={{ fontSize: '0.9rem', color: 'var(--accent)', textDecoration: 'none' }}>View Demo Center →</Link>
+          </div>
+          
+          <div className="eng-panel reveal" style={{ transitionDelay: '100ms' }}>
+            {[
+              { name: 'HealthSmile Voice Node', status: 'Stable', color: 'var(--status-online)' },
+              { name: 'AI Lead Management', status: 'In Development', color: 'var(--logo-orange)' },
+              { name: 'Customer Communication', status: 'Planning', color: 'var(--text-3)' },
+              { name: 'Operations Platform', status: 'Research', color: 'var(--text-3)' },
+              { name: 'Document Processing', status: 'Planning', color: 'var(--text-3)' }
+            ].map((sys, i) => (
+              <div key={sys.name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 32px', borderBottom: i !== 4 ? '1px solid var(--border)' : 'none' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: sys.color, boxShadow: `0 0 10px ${sys.color}` }}></div>
+                  <div style={{ color: 'var(--text-main)', fontWeight: 500 }}>{sys.name}</div>
+                </div>
+                <div style={{ color: 'var(--text-2)', fontSize: '0.9rem', fontFamily: 'SF Mono, monospace' }}>{sys.status}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

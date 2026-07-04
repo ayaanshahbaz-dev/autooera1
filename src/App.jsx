@@ -12,6 +12,7 @@ import Studio from './pages/Studio';
 import Insights from './pages/Insights';
 import InsightPost from './pages/InsightPost';
 import Contact from './pages/Contact';
+import Demo from './pages/Demo';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/insights" element={<Insights />} />
         <Route path="/insights/:slug" element={<InsightPost />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/demo" element={<Demo />} />
       </Routes>
       <Footer />
     </div>
