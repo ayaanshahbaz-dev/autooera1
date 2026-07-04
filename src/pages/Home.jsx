@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, Brain, Database, Settings, BarChart, LineChart, Users, ShieldCheck, Layers, Network, Lock, ArrowRight } from 'lucide-react';
+import { User, Brain, Database, Settings, BarChart, LineChart, Users, ShieldCheck, Layers, Network, Lock, ArrowRight, Zap, FileCode2, Code } from 'lucide-react';
 
 /* ============================================================
    INTERACTIVE SYSTEM SHOWCASE (THE HERO DIAGRAM)
@@ -20,7 +20,7 @@ function SystemShowcase() {
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}>
       
       {/* Background Glowing Grid (Optional extra flair) */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(0,229,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px', maskImage: 'radial-gradient(circle at center, black, transparent 70%)', zIndex: 0 pointerEvents: 'none' }}></div>
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(0,229,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px', maskImage: 'radial-gradient(circle at center, black, transparent 70%)', zIndex: 0, pointerEvents: 'none' }}></div>
 
       {/* The Central Glowing Line */}
       <div style={{ position: 'absolute', left: '10%', right: '10%', height: '2px', background: 'var(--accent)', zIndex: 1, boxShadow: '0 0 15px var(--accent-glow)' }}></div>
