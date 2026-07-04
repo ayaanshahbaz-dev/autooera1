@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, Brain, Database, Settings, BarChart, LineChart, Users, ShieldCheck, Layers, Network, Lock, ArrowRight, Zap, FileCode2, Code } from 'lucide-react';
+import { User, Brain, Database, Settings, BarChart, LineChart, Users, ShieldCheck, Layers, Network, Lock, ArrowRight, Zap, FileCode2, Code, Plus } from 'lucide-react';
 
 /* ============================================================
    INTERACTIVE SYSTEM SHOWCASE (THE HERO DIAGRAM)
@@ -53,18 +53,7 @@ function SystemShowcase() {
           const Icon = node.icon;
           return (
             <div key={node.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-              <div style={{ 
-                width: '64px', 
-                height: '80px', 
-                background: '#050505', 
-                border: '1px solid rgba(0, 229, 255, 0.3)', 
-                borderRadius: '8px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                boxShadow: 'inset 0 0 20px rgba(0, 229, 255, 0.05), 0 4px 20px rgba(0,0,0,0.5)',
-                position: 'relative'
-              }}>
+              <div className="hero-node">
                 <Icon size={28} style={{ color: 'var(--accent)' }} />
               </div>
               <div style={{ color: 'var(--text-2)', fontSize: '0.75rem', textAlign: 'center', whiteSpace: 'pre-line', lineHeight: 1.4 }}>
@@ -209,7 +198,7 @@ export default function Home() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '16px' }}>
               
-              <div style={{ background: '#111', border: '1px solid #222', borderRadius: '8px', padding: '20px' }}>
+              <div className="status-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
                     <Network size={16} style={{ color: 'var(--status-online)' }} /> HealthSmile Voice Node
@@ -224,7 +213,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ background: '#111', border: '1px solid #222', borderRadius: '8px', padding: '20px' }}>
+              <div className="status-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
                     <Zap size={16} style={{ color: 'var(--logo-orange)' }} /> AI Lead Management
@@ -239,7 +228,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ background: '#111', border: '1px solid #222', borderRadius: '8px', padding: '20px' }}>
+              <div className="status-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
                     <Network size={16} style={{ color: 'var(--accent)' }} /> Customer Communication
@@ -254,7 +243,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ background: '#111', border: '1px solid #222', borderRadius: '8px', padding: '20px' }}>
+              <div className="status-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
                     <Layers size={16} style={{ color: '#8b5cf6' }} /> Operations Platform
@@ -269,7 +258,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ background: '#111', border: '1px solid #222', borderRadius: '8px', padding: '20px' }}>
+              <div className="status-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
                     <FileCode2 size={16} style={{ color: 'var(--accent)' }} /> Document Processing
@@ -297,8 +286,56 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '60px', flexWrap: 'wrap', opacity: 0.6 }}>
             {['PostgreSQL', 'Django', 'React', 'Docker', 'AWS', 'n8n'].map(tech => (
-              <div key={tech} style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-2)' }}>{tech}</div>
+              <div key={tech} style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-2)', cursor: 'default', transition: 'var(--t-fast)' }} onMouseEnter={(e) => {e.target.style.color = 'var(--text-main)'; e.target.style.transform = 'scale(1.05)'}} onMouseLeave={(e) => {e.target.style.color = 'var(--text-2)'; e.target.style.transform = 'none'}}>{tech}</div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FAQ ================= */}
+      <section style={{ padding: '80px 0', borderTop: '1px solid var(--border)', background: 'var(--bg-dark)' }}>
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <div className="reveal" style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>Engineering FAQ</h2>
+            <p style={{ color: 'var(--text-2)', fontSize: '1.1rem' }}>Technical details about how we architect and deploy our systems.</p>
+          </div>
+          
+          <div className="reveal" style={{ transitionDelay: '100ms' }}>
+            {[
+              { q: 'How do your integrations work?', a: 'We build decentralized middleware, typically using Python/FastAPI or n8n hosted on our secure instances. We do not rely on fragile Zapier connections. Every integration operates via strict API contracts and webhooks, ensuring robust error handling and exponential retry logic.' },
+              { q: 'Is the architecture scalable?', a: 'Yes. By default, our backend services are stateless and containerized via Docker. We use PostgreSQL as our primary data store, allowing us to vertically and horizontally scale the database independently of the application layer.' },
+              { q: 'Can modules be customized?', a: 'Absolutely. We do not sell boxed SaaS products. The systems listed in our portfolio are foundational architectural patterns. When we deploy them for your business, the business logic, UI, and data schemas are entirely customized to your operations.' },
+              { q: 'Do you provide the source code?', a: 'Yes. Upon final deployment, you receive full ownership of the system, including the complete codebase, Dockerfiles, environment configurations, and extensive technical documentation. You are not locked into our studio forever.' },
+              { q: 'Can this connect with my existing legacy systems?', a: 'If your legacy system has a REST API, SOAP interface, or even just direct database access, we can connect to it. If it has none of those, we can often engineer custom scraper-based or file-drop integrations to bridge the gap.' }
+            ].map((faq, i) => (
+              <div key={i} className="faq-item" onClick={(e) => e.currentTarget.classList.toggle('active')}>
+                <div className="faq-question">
+                  {faq.q}
+                  <Plus size={20} className="faq-icon" />
+                </div>
+                <div className="faq-answer">{faq.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section style={{ padding: '120px 0', background: '#050505', borderTop: '1px solid var(--border)' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <div className="reveal" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <span style={{ display: 'inline-block', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--accent)', marginBottom: '24px', textTransform: 'uppercase' }}>Ready to scale?</span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '32px', lineHeight: 1.1 }}>
+              Stop adapting your business to generic software.
+            </h2>
+            <p style={{ fontSize: '1.2rem', color: 'var(--text-2)', marginBottom: '48px', lineHeight: 1.6 }}>
+              Let's map your current operations and engineer a custom system that eliminates bottlenecks and drives autonomous growth.
+            </p>
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+              <Link to="/contact" className="btn btn-primary" style={{ background: 'var(--accent)', color: '#000', padding: '0 40px', height: '56px', fontSize: '1.1rem', fontWeight: 600 }}>
+                Book Discovery Call <ArrowRight size={18} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

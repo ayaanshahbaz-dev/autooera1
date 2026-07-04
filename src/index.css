@@ -161,6 +161,83 @@
   .eng-panel:hover {
     border-color: var(--border-hover);
   }
+
+  /* Interactive Elements */
+  .hero-node {
+    width: 64px;
+    height: 80px;
+    background: #050505;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05), 0 4px 20px rgba(0,0,0,0.5);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+  .hero-node:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: rgba(0, 229, 255, 0.8);
+    box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.2), 0 10px 30px rgba(0, 229, 255, 0.2);
+  }
+  .hero-node svg {
+    transition: all 0.3s ease;
+  }
+  .hero-node:hover svg {
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
+
+  .status-card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .status-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    background: #151515;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    transition: var(--t-fast);
+  }
+  .faq-item:hover .faq-question {
+    color: var(--accent);
+  }
+  .faq-answer {
+    color: var(--text-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-top: 16px;
+    display: none;
+  }
+  .faq-item.active .faq-answer {
+    display: block;
+  }
+  .faq-item.active .faq-icon {
+    transform: rotate(45deg);
+  }
+  .faq-icon {
+    transition: var(--t-fast);
+    color: var(--accent);
+  }
   
   /* ============================================================
      BUTTONS
