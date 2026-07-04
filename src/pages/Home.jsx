@@ -1,293 +1,231 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Box, Cpu, Database, Network, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, Database, Server, Workflow, Lock, Zap, FileCode2 } from 'lucide-react';
 
 /* ============================================================
-   TILT EFFECT HOOK
+   INTERACTIVE SYSTEM SHOWCASE (THE "WOW" SECTION)
    ============================================================ */
-function useTilt(active = true) {
-  const ref = useRef(null);
-  
+function SystemShowcase() {
+  const [activeNode, setActiveNode] = useState(0);
+  const nodes = [
+    { label: 'Lead Capture', icon: Workflow, desc: 'Webhooks intercept payload from ad platforms instantly.' },
+    { label: 'AI Qualification', icon: Zap, desc: 'LLM evaluates intent and extracts core requirements.' },
+    { label: 'CRM Sync', icon: Database, desc: 'Bi-directional update to PostgreSQL & HubSpot.' },
+    { label: 'Operations Dashboard', icon: Server, desc: 'Real-time WebSocket event pushes to sales team.' }
+  ];
+
   useEffect(() => {
-    if (!active || !ref.current) return;
-    
-    const el = ref.current;
-    const handleMouseMove = (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
-      
-      el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    };
-    
-    const handleMouseLeave = () => {
-      el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
-    };
-    
-    el.addEventListener('mousemove', handleMouseMove);
-    el.addEventListener('mouseleave', handleMouseLeave);
-    
-    return () => {
-      el.removeEventListener('mousemove', handleMouseMove);
-      el.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [active]);
-  
-  return ref;
-}
-
-/* ============================================================
-   PREMIUM HERO COMPONENT
-   ============================================================ */
-function PremiumHero() {
-  const tiltRef = useTilt(true);
+    const interval = setInterval(() => {
+      setActiveNode((prev) => (prev + 1) % nodes.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [nodes.length]);
 
   return (
-    <section className="hero">
-      <div className="hero-radial" aria-hidden="true" />
-      <div className="container hero-inner">
-        
-        {/* Left Content */}
-        <div className="hero-content reveal visible">
-          <div className="hero-label" style={{ animation: 'float-3d 6s infinite' }}>
-            <span className="hero-label-dot" style={{ background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)' }}></span>
-            SYS.CORE // V3.0
-          </div>
-          
-          <h1 className="hero-title" style={{ fontSize: 'clamp(3.5rem, 7vw, 5.5rem)', lineHeight: 1.05 }}>
-            Automate <br/>
-            The <span className="hero-title-accent">Invisible.</span>
-          </h1>
-          
-          <p className="hero-desc" style={{ color: 'var(--text-2)', fontSize: '1.2rem', maxWidth: '540px' }}>
-            We engineer high-performance AI systems and digital workflows that 
-            eliminate bottlenecks and scale your operations quietly in the background.
-          </p>
-          
-          <div className="hero-ctas" style={{ marginTop: '48px' }}>
-            <Link to="/contact" className="btn btn-primary" style={{ padding: '0 32px', height: '56px', fontSize: '1.05rem' }}>
-              Start a Project
-              <ArrowRight size={18} />
-            </Link>
-            <Link to="/portfolio" className="btn btn-outline" style={{ padding: '0 32px', height: '56px', fontSize: '1.05rem' }}>
-              View Case Studies
-            </Link>
-          </div>
-        </div>
+    <div className="eng-panel" style={{ padding: '40px', marginTop: '60px', position: 'relative' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
+        <span className="tech-label" style={{ margin: 0 }}>SYS_TOPOLOGY</span>
+        <span style={{ fontSize: '0.8rem', color: 'var(--text-3)', fontFamily: 'SF Mono, monospace' }}>LATENCY: 14ms</span>
+      </div>
 
-        {/* Right Visual - Abstract Data Pipeline */}
-        <div className="hero-visual reveal visible" style={{ transitionDelay: '200ms' }}>
-          <div 
-            ref={tiltRef}
-            className="hero-data-panel glass-panel"
-            style={{ 
-              position: 'relative', width: '100%', height: '480px', 
-              display: 'flex', flexDirection: 'column', padding: '32px',
-              transition: 'transform 0.1s ease-out'
-            }}
-          >
-            <div className="panel-header">
-              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent)' }}></span>
-                WORKFLOW ENGINE
-              </span>
-              <span style={{ color: 'var(--green)' }}>● ONLINE</span>
-            </div>
-
-            <div className="panel-nodes" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              
-              {/* Node 1 */}
-              <div className="node-row" style={{ transform: 'translateZ(20px)' }}>
-                <div className="node-icon active"><Network size={20} /></div>
-                <div className="node-info">
-                  <div className="node-title">API Gateway</div>
-                  <div className="node-desc" style={{ color: 'var(--text-3)' }}>Receiving webhook payloads...</div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'center' }}>
+        {nodes.map((node, i) => {
+          const isActive = i === activeNode;
+          const isPast = i < activeNode;
+          const Icon = node.icon;
+          
+          return (
+            <div key={node.label} style={{ display: 'flex', alignItems: 'center', flex: '1 1 auto' }}>
+              <div style={{ 
+                padding: '20px', 
+                background: isActive ? 'var(--accent-dim)' : 'rgba(255,255,255,0.02)',
+                border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border)'}`,
+                borderRadius: 'var(--r-md)',
+                minWidth: '200px',
+                transition: 'all 0.3s ease'
+              }}>
+                <div style={{ color: isActive ? 'var(--accent)' : 'var(--text-3)', marginBottom: '12px' }}>
+                  <Icon size={24} />
                 </div>
-                <div className="node-status">SYNCED</div>
+                <div style={{ color: isActive ? 'var(--text-main)' : 'var(--text-2)', fontWeight: 500, fontSize: '0.9rem', marginBottom: '8px' }}>
+                  {node.label}
+                </div>
+                <div style={{ color: 'var(--text-3)', fontSize: '0.8rem', height: '40px', opacity: isActive ? 1 : 0, transition: 'opacity 0.3s' }}>
+                  {node.desc}
+                </div>
               </div>
 
-              {/* Connecting Line */}
-              <div style={{ height: '32px', width: '2px', background: 'var(--border)', margin: '0 0 0 35px', position: 'relative' }}>
+              {i < nodes.length - 1 && (
                 <div style={{ 
-                  position: 'absolute', top: 0, left: '-2px', width: '6px', height: '6px', 
-                  background: 'var(--accent)', borderRadius: '50%',
-                  animation: 'travelDown 2s infinite'
-                }}></div>
-              </div>
-
-              {/* Node 2 */}
-              <div className="node-row" style={{ transform: 'translateZ(30px)', borderColor: 'var(--accent)', background: 'rgba(255,149,0,0.03)' }}>
-                <div className="node-icon" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}><Cpu size={20} /></div>
-                <div className="node-info">
-                  <div className="node-title" style={{ color: 'var(--text-main)' }}>LLM Processing</div>
-                  <div className="node-desc" style={{ color: 'var(--text-3)' }}>Extracting entities & intent</div>
+                  flex: 1, height: '2px', minWidth: '40px',
+                  background: isPast || isActive ? 'var(--accent)' : 'var(--border)',
+                  position: 'relative', margin: '0 10px',
+                  transition: 'background 0.3s ease'
+                }}>
+                  {isActive && (
+                    <div style={{
+                      position: 'absolute', top: '-3px', left: 0,
+                      width: '8px', height: '8px', borderRadius: '50%',
+                      background: 'var(--text-main)',
+                      boxShadow: '0 0 10px var(--accent)',
+                      animation: 'moveRight 2.5s linear infinite'
+                    }} />
+                  )}
                 </div>
-                <div className="node-status" style={{ background: 'rgba(255,149,0,0.1)', color: 'var(--accent)' }}>ACTIVE</div>
-              </div>
-
-              {/* Connecting Line */}
-              <div style={{ height: '32px', width: '2px', background: 'var(--border)', margin: '0 0 0 35px', position: 'relative' }}>
-                <div style={{ 
-                  position: 'absolute', top: 0, left: '-2px', width: '6px', height: '6px', 
-                  background: 'var(--accent)', borderRadius: '50%',
-                  animation: 'travelDown 2s infinite 1s'
-                }}></div>
-              </div>
-
-              {/* Node 3 */}
-              <div className="node-row" style={{ transform: 'translateZ(20px)' }}>
-                <div className="node-icon"><Database size={20} /></div>
-                <div className="node-info">
-                  <div className="node-title">CRM Integration</div>
-                  <div className="node-desc" style={{ color: 'var(--text-3)' }}>Updating client records</div>
-                </div>
-                <div className="node-status" style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-2)' }}>IDLE</div>
-              </div>
-
+              )}
             </div>
-          </div>
-          
-          <style>{`
-            @keyframes travelDown {
-              0% { top: 0; opacity: 1; }
-              100% { top: 32px; opacity: 0; }
-            }
-          `}</style>
-        </div>
+          );
+        })}
       </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   BENTO SERVICE CARD
-   ============================================================ */
-function ServiceCard({ icon: Icon, title, desc, tags, delay = 0 }) {
-  const tiltRef = useTilt(true);
-  
-  return (
-    <div 
-      ref={tiltRef}
-      className="bento-card reveal" 
-      style={{ transitionDelay: `${delay}ms`, transformStyle: 'preserve-3d' }}
-    >
-      <div className="bento-icon" style={{ transform: 'translateZ(20px)' }}>
-        <Icon size={24} />
-      </div>
-      <h3 className="bento-title" style={{ transform: 'translateZ(15px)' }}>{title}</h3>
-      <p style={{ color: 'var(--text-2)', transform: 'translateZ(10px)' }}>{desc}</p>
-      <div className="bento-tags" style={{ transform: 'translateZ(5px)' }}>
-        {tags.map(t => <span key={t} className="bento-tag">{t}</span>)}
-      </div>
+      <style>{`
+        @keyframes moveRight {
+          0% { left: 0; opacity: 1; }
+          90% { left: 100%; opacity: 1; }
+          100% { left: 100%; opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 }
 
 /* ============================================================
-   HOME PAGE
+   HOMEPAGE
    ============================================================ */
 export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) e.target.classList.add('visible');
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      }),
+      { threshold: 0.1 }
     );
     const els = document.querySelectorAll('.reveal:not(.visible)');
     els.forEach(el => observer.observe(el));
     return () => els.forEach(el => observer.unobserve(el));
   }, []);
 
-  const services = [
-    {
-      icon: Network,
-      title: 'Workflow Orchestration',
-      desc: 'Complex API integrations connecting your isolated tools into a single automated pipeline.',
-      tags: ['n8n', 'Make', 'Webhooks', 'REST APIs']
-    },
-    {
-      icon: Cpu,
-      title: 'Applied AI Systems',
-      desc: 'LLM integrations that process data, answer queries, and make decisions within your workflow.',
-      tags: ['OpenAI', 'Claude', 'LangChain', 'RAG']
-    },
-    {
-      icon: Database,
-      title: 'Data & CRM Sync',
-      desc: 'Bi-directional synchronization ensuring your source of truth is always accurate instantly.',
-      tags: ['HubSpot', 'Salesforce', 'Airtable', 'SQL']
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Custom Engineering',
-      desc: 'Bespoke web applications and internal tools built when off-the-shelf software fails.',
-      tags: ['React', 'Node.js', 'Python', 'Next.js']
-    }
-  ];
-
   return (
     <main>
-      <PremiumHero />
-
-      {/* Philosophy / Statement */}
-      <section style={{ padding: '120px 0', borderTop: '1px solid var(--border)', background: 'var(--bg-darker)' }}>
+      <div className="blueprint-grid" />
+      
+      {/* ================= HERO ================= */}
+      <section style={{ paddingTop: 'calc(var(--nav-h) + 120px)', paddingBottom: '80px' }}>
         <div className="container">
-          <div className="reveal" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-            <span className="section-label" style={{ justifyContent: 'center' }}>The Studio Philosophy</span>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.2, marginBottom: '32px' }}>
-              We build systems that work <br/>
-              so your people don't have to.
-            </h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-2)' }}>
-              AutoEra isn't an agency wrapping templates in new branding. We are an engineering 
-              studio architecting bespoke, logic-first automation systems. We look at your 
-              operational bottlenecks and build the exact invisible machinery needed to clear them.
+          <div className="reveal">
+            <span className="tech-label">AUTOERA ENGINEERING STUDIO</span>
+            <h1 style={{ maxWidth: '900px', marginBottom: '32px' }}>
+              We engineer software systems around your business, not the other way around.
+            </h1>
+            <p style={{ fontSize: '1.2rem', color: 'var(--text-2)', maxWidth: '600px', marginBottom: '48px', lineHeight: 1.8 }}>
+              We don't build generic chatbots. We architect mission-critical infrastructure, custom software, and intelligent pipelines that scale your operations autonomously.
             </p>
+            
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <Link to="/contact" className="btn btn-primary" style={{ padding: '0 32px', height: '48px' }}>
+                Book Discovery Call
+              </Link>
+              <Link to="/solutions" className="btn btn-outline" style={{ padding: '0 32px', height: '48px' }}>
+                Explore Systems
+              </Link>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: '200ms' }}>
+            <SystemShowcase />
           </div>
         </div>
       </section>
 
-      {/* Services Matrix */}
+      {/* ================= METRICS ================= */}
+      <section style={{ padding: '80px 0', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
+            <div className="reveal">
+              <div style={{ fontSize: '3rem', fontWeight: 600, color: 'var(--text-main)', letterSpacing: '-0.05em' }}>99.9%</div>
+              <div style={{ color: 'var(--text-3)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>System Availability</div>
+            </div>
+            <div className="reveal" style={{ transitionDelay: '100ms' }}>
+              <div style={{ fontSize: '3rem', fontWeight: 600, color: 'var(--text-main)', letterSpacing: '-0.05em' }}>&lt;2 sec</div>
+              <div style={{ color: 'var(--text-3)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>Average Response</div>
+            </div>
+            <div className="reveal" style={{ transitionDelay: '200ms' }}>
+              <div style={{ fontSize: '3rem', fontWeight: 600, color: 'var(--text-main)', letterSpacing: '-0.05em' }}>40+</div>
+              <div style={{ color: 'var(--text-3)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>Supported Integrations</div>
+            </div>
+            <div className="reveal" style={{ transitionDelay: '300ms' }}>
+              <div style={{ fontSize: '3rem', fontWeight: 600, color: 'var(--accent)', letterSpacing: '-0.05em' }}>Ready</div>
+              <div style={{ color: 'var(--text-3)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>Enterprise Architecture</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= THE PAIN / SOLUTION ================= */}
       <section style={{ padding: '120px 0' }}>
         <div className="container">
-          <div className="reveal">
-            <span className="section-label">01 / CAPABILITIES</span>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '16px' }}>Tech Matrix</h2>
-            <div style={{ height: '1px', width: '100%', background: 'linear-gradient(90deg, var(--border), transparent)', marginBottom: '48px' }}></div>
+          <div className="reveal" style={{ maxWidth: '800px', marginBottom: '80px' }}>
+            <h2 style={{ marginBottom: '32px' }}>Most businesses are held together by spreadsheets and manual data entry.</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', color: 'var(--text-2)', fontSize: '1.1rem' }}>
+              <p>Lost leads in overflowing inboxes.</p>
+              <p>Disconnected CRMs that require manual syncing.</p>
+              <p>Fragmented operations spread across 10 different generic SaaS tools.</p>
+              <p style={{ color: 'var(--accent)', marginTop: '24px', fontWeight: 500 }}>
+                We engineer the systems that permanently solve these problems.
+              </p>
+            </div>
           </div>
-          
-          <div className="bento-grid">
-            {services.map((s, i) => (
-              <ServiceCard key={s.title} {...s} delay={i * 100} />
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2px', background: 'var(--border)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', background: 'var(--bg-dark)' }}>
+              <div style={{ padding: '32px', color: 'var(--text-3)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>Traditional Software</div>
+              <div style={{ padding: '32px', color: 'var(--accent)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>AutoEra Engineering</div>
+            </div>
+            
+            {[
+              ['Generic tools forcing you to adapt', 'Custom systems adapting to your business'],
+              ['Manual work and data entry', 'Intelligent workflows and background tasks'],
+              ['Multiple disconnected subscriptions', 'Unified platforms owning the data layer'],
+              ['Reactive support tickets', 'Proactive automation and alerting']
+            ].map((row, i) => (
+              <div key={i} className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', background: 'var(--bg-dark)', transitionDelay: `${i*50}ms` }}>
+                <div style={{ padding: '32px', color: 'var(--text-2)', borderRight: '1px solid var(--border)' }}>{row[0]}</div>
+                <div style={{ padding: '32px', color: 'var(--text-main)', fontWeight: 500 }}>{row[1]}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section style={{ padding: '120px 0', borderTop: '1px solid var(--border)' }}>
+      {/* ================= ENGINEERING PRINCIPLES ================= */}
+      <section style={{ padding: '120px 0', borderTop: '1px solid var(--border)', background: 'rgba(255,255,255,0.01)' }}>
         <div className="container">
-          <div className="glass-panel reveal" style={{ padding: '80px 40px', textAlign: 'center', borderColor: 'var(--border-accent)' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '24px' }}>Ready to scale your operations?</h2>
-            <p style={{ color: 'var(--text-2)', maxWidth: '500px', margin: '0 auto 40px', fontSize: '1.1rem' }}>
-              Let's map out your current workflows and architect the exact systems you need to automate them.
+          <div className="reveal" style={{ marginBottom: '60px' }}>
+            <span className="tech-label">INFRASTRUCTURE</span>
+            <h2>Engineering Trust.</h2>
+            <p style={{ color: 'var(--text-2)', maxWidth: '600px', marginTop: '16px' }}>
+              We build systems that handle mission-critical data. That requires strict adherence to software engineering fundamentals.
             </p>
-            <Link to="/contact" className="btn btn-primary" style={{ padding: '0 32px', height: '56px', fontSize: '1.05rem' }}>
-              Initiate Project
-              <ArrowRight size={18} />
-            </Link>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            {[
+              { icon: Lock, title: 'Security by Design', desc: 'Strict RBAC, encrypted payloads, and secure credential vaults.' },
+              { icon: Server, title: 'Scalable Architecture', desc: 'Dockerized microservices ready to scale vertically or horizontally.' },
+              { icon: FileCode2, title: 'Clean Documentation', desc: 'Comprehensive API documentation so you are never locked out of your own system.' }
+            ].map((feature, i) => {
+              const Icon = feature.icon;
+              return (
+                <div key={feature.title} className="eng-panel reveal" style={{ padding: '32px', transitionDelay: `${i*100}ms` }}>
+                  <Icon size={24} style={{ color: 'var(--accent)', marginBottom: '24px' }} />
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>{feature.title}</h3>
+                  <p style={{ color: 'var(--text-2)', fontSize: '0.95rem' }}>{feature.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
+
     </main>
   );
 }

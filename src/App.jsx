@@ -4,12 +4,13 @@ import Footer from './components/Footer';
 
 // Pages
 import Home from './pages/Home';
-import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
+import Solutions from './pages/Solutions';
+import Engineering from './pages/Engineering';
+import Work from './pages/Work';
 import CaseStudy from './pages/CaseStudy';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import About from './pages/About';
+import Studio from './pages/Studio';
+import Insights from './pages/Insights';
+import InsightPost from './pages/InsightPost';
 import Contact from './pages/Contact';
 
 function App() {
@@ -18,12 +19,13 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/portfolio/:id" element={<CaseStudy />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/solutions" element={<Solutions />} />
+        <Route path="/engineering" element={<Engineering />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/work/:id" element={<CaseStudy />} />
+        <Route path="/studio" element={<Studio />} />
+        <Route path="/insights" element={<Insights />} />
+        <Route path="/insights/:slug" element={<InsightPost />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
