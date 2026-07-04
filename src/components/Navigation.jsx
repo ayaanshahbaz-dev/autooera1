@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Menu, X } from 'lucide-react';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -13,12 +14,15 @@ export default function Navigation() {
   }, []);
 
   // Close drawer on route change
-  const closeMenu = () => setMobileOpen(false);
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location]);
 
   const links = [
     { name: 'Services', path: '/services' },
+    { name: 'Portfolio', path: '/portfolio' },
     { name: 'About',    path: '/about' },
-    { name: 'Contact',  path: '/contact' },
+    { name: 'Blog',     path: '/blog' },
   ];
 
   return (
@@ -26,12 +30,13 @@ export default function Navigation() {
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation">
         <div className="container nav-inner">
           {/* Logo */}
-          <Link to="/" className="nav-logo" onClick={closeMenu} aria-label="AutoEra — Home">
+          <Link to="/" className="nav-logo" aria-label="AutoEra — Home">
             <svg
               className="nav-logo-svg"
               viewBox="0 0 176 38"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              style={{ height: '28px', width: 'auto' }}
               role="img"
               aria-label="AutoEra"
             >
@@ -40,7 +45,7 @@ export default function Navigation() {
                 y="28"
                 fontFamily="'Outfit', sans-serif"
                 fontWeight="800"
-                fontSize="28"
+                fontSize="32"
                 fill="#FFFFFF"
                 letterSpacing="-1"
               >
@@ -48,16 +53,16 @@ export default function Navigation() {
               </text>
               {/* Lightning bolt mark */}
               <path
-                d="M82 5 L73 20.5 H78.5 L71.5 33 L81.5 18 H76 L82 5Z"
+                d="M86 4 L76 21 H82 L74 36 L86 19 H80 L86 4Z"
                 fill="#FF9500"
                 strokeLinejoin="round"
               />
               <text
-                x="89"
+                x="94"
                 y="28"
                 fontFamily="'Outfit', sans-serif"
                 fontWeight="800"
-                fontSize="28"
+                fontSize="32"
                 fill="#FFFFFF"
                 letterSpacing="-1"
               >
@@ -82,19 +87,21 @@ export default function Navigation() {
 
           {/* Desktop CTA */}
           <div className="nav-right">
-            <Link to="/contact" className="btn btn-primary" id="nav-cta">
-              Book a Call
-              <ArrowRight size={16} />
+            <Link to="/contact" className="btn btn-outline" style={{ display: 'none', height: '40px', padding: '0 20px', fontSize: '0.85rem' }}>
+              Contact
+            </Link>
+            <Link to="/contact" className="btn btn-primary" style={{ height: '40px', padding: '0 20px', fontSize: '0.85rem' }}>
+              Start Project
             </Link>
 
             {/* Hamburger */}
             <button
-              className={`nav-hamburger ${mobileOpen ? 'open' : ''}`}
+              className="nav-hamburger"
               onClick={() => setMobileOpen(o => !o)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -102,24 +109,26 @@ export default function Navigation() {
 
       {/* Mobile Drawer */}
       <div className={`nav-drawer ${mobileOpen ? 'open' : ''}`} aria-hidden={!mobileOpen}>
-        {links.map(({ name, path }) => (
-          <NavLink
-            key={name}
-            to={path}
-            className="nav-link"
-            onClick={closeMenu}
+        <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {links.map(({ name, path }) => (
+            <NavLink
+              key={name}
+              to={path}
+              className="nav-link"
+            >
+              {name}
+            </NavLink>
+          ))}
+          <div style={{ height: '1px', background: 'var(--border)', margin: '10px 0' }}></div>
+          <Link
+            to="/contact"
+            className="btn btn-primary"
+            style={{ justifyContent: 'center' }}
           >
-            {name}
-          </NavLink>
-        ))}
-        <Link
-          to="/contact"
-          className="btn btn-primary"
-          onClick={closeMenu}
-        >
-          Book a Discovery Call
-          <ArrowRight size={16} />
-        </Link>
+            Start Project
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
     </>
   );

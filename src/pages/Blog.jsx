@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 
 export default function Blog() {
   useEffect(() => {
@@ -8,43 +7,74 @@ export default function Blog() {
       entries => entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('visible');
       }),
-      { threshold: 0.08 }
+      { threshold: 0.1 }
     );
     const els = document.querySelectorAll('.reveal');
     els.forEach(el => observer.observe(el));
     return () => els.forEach(el => observer.unobserve(el));
   }, []);
 
+  const articles = [
+    {
+      slug: 'why-n8n-beats-zapier-for-enterprise',
+      title: 'Why we use n8n over Zapier for production-grade automation',
+      date: 'Oct 12, 2026',
+      readTime: '6 min read',
+      tag: 'Architecture'
+    },
+    {
+      slug: 'structuring-llm-outputs-json',
+      title: 'Forcing LLMs to output reliable JSON for API webhooks',
+      date: 'Sep 28, 2026',
+      readTime: '4 min read',
+      tag: 'Engineering'
+    },
+    {
+      slug: 'the-death-of-manual-data-entry',
+      title: 'The death of manual data entry: CRM sync strategies',
+      date: 'Sep 15, 2026',
+      readTime: '8 min read',
+      tag: 'Strategy'
+    }
+  ];
+
   return (
-    <div className="portfolio-page">
-      <section className="page-hero" style={{ paddingTop: 'calc(var(--nav-h) + 80px)' }}>
+    <main style={{ paddingTop: 'calc(var(--nav-h) + 60px)' }}>
+      <section style={{ paddingBottom: '80px' }}>
         <div className="container">
           <div className="reveal">
-            <span className="section-label">Engineering notes</span>
-            <h1>Writing from the field.</h1>
-            <p>
-              Technical insights, system architecture decisions, and operational
-              observations from building AI systems in production.
-            </p>
+            <span className="section-label">Engineering Notes</span>
+            <h1 style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', marginBottom: '24px' }}>
+              Writing from the <span style={{ color: 'var(--text-3)' }}>terminal.</span>
+            </h1>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '80px 0', borderTop: '1px solid var(--border)' }}>
-        <div className="container">
-          <div className="reveal" style={{ maxWidth: 600 }}>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'var(--text-2)', marginBottom: 32 }}>
-              Content coming soon. In the meantime, if you have specific questions
-              about AI system architecture, integration patterns, or operational
-              automation — bring them to the discovery call.
-            </p>
-            <Link to="/contact" className="btn btn-ghost" id="blog-cta" style={{ height: 50, padding: '0 24px' }}>
-              Book a Discovery Call
-              <ArrowRight size={16} />
-            </Link>
+      <section style={{ paddingBottom: '120px' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+            {articles.map((a, i) => (
+              <Link key={a.slug} to={`/blog/${a.slug}`} className="reveal" style={{ 
+                display: 'block', textDecoration: 'none', borderBottom: '1px solid var(--border)', 
+                paddingBottom: '48px', transitionDelay: `${i * 100}ms`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>{a.tag}</span>
+                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--border)' }}></span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-3)' }}>{a.date}</span>
+                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--border)' }}></span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-3)' }}>{a.readTime}</span>
+                </div>
+                <h2 style={{ fontSize: '2rem', color: 'var(--text-main)', marginBottom: '16px', transition: 'var(--t-fast)' }}>{a.title}</h2>
+                <div style={{ color: 'var(--text-2)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem' }}>
+                  Read Transmission <span style={{ color: 'var(--accent)' }}>→</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

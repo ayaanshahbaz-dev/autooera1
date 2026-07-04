@@ -1,171 +1,43 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Phone, Zap, MessageSquare, BookOpen, Settings, Layers } from 'lucide-react';
+import { ArrowRight, Box, Phone, MessageSquare, BookOpen, Layers, Settings } from 'lucide-react';
 
-const services = [
-  {
-    id: 'ai-receptionist',
-    num: '01',
-    icon: Phone,
-    title: 'AI Receptionist',
-    summary: 'Answers every inbound call, 24 hours a day, 7 days a week.',
-    desc: 'We engineer a voice AI system that handles your inbound call volume without requiring staff to be available. The system greets callers, answers common questions, qualifies leads, books appointments, and routes calls based on logic you define. It sounds professional, responds accurately, and never drops a call.',
-    features: [
-      {
-        title: '24/7 inbound call handling',
-        desc: 'Every call is answered — after hours, weekends, and during peak volume spikes.',
-      },
-      {
-        title: 'Lead qualification',
-        desc: 'The system asks the right questions to determine caller intent and quality before routing.',
-      },
-      {
-        title: 'Appointment booking',
-        desc: 'Integrates directly with your calendar system to book, confirm, and reschedule appointments.',
-      },
-      {
-        title: 'Intelligent call routing',
-        desc: 'Routes callers to the right team member or department based on conversation logic.',
-      },
-    ],
-    tags: ['Voice AI', 'Call Routing', 'Appointment Booking', 'CRM Integration', 'Calendar Sync'],
-  },
-  {
-    id: 'lead-response',
-    num: '02',
-    icon: Zap,
-    title: 'Lead Response System',
-    summary: 'Instant, intelligent response to every inbound lead.',
-    desc: 'We build multi-channel lead response systems that respond to prospects within seconds — across web forms, inbound calls, social messages, and email. The system qualifies leads against your criteria, scores them, and routes qualified prospects to your team with full context already attached.',
-    features: [
-      {
-        title: 'Multi-channel response',
-        desc: 'Responds to leads from web forms, calls, emails, SMS, and social — from a single system.',
-      },
-      {
-        title: 'Qualification logic',
-        desc: 'Asks the right questions to determine fit before routing to your sales team.',
-      },
-      {
-        title: 'CRM handoff',
-        desc: 'Creates or updates CRM records automatically with conversation context and lead score.',
-      },
-      {
-        title: 'Follow-up sequences',
-        desc: 'Automated follow-up over 24–72 hours for leads that don\'t respond immediately.',
-      },
-    ],
-    tags: ['Multi-channel', 'Lead Scoring', 'CRM Sync', 'Follow-up Automation', 'Pipeline Integration'],
-  },
-  {
-    id: 'customer-support',
-    num: '03',
-    icon: MessageSquare,
-    title: 'Customer Support System',
-    summary: 'Resolve routine requests automatically. Escalate complex issues intelligently.',
-    desc: 'We build AI support systems trained on your documentation, past tickets, and internal knowledge. The system handles the requests your team handles repeatedly — password resets, account questions, billing inquiries, how-to requests — and escalates anything requiring human judgement with full conversation context.',
-    features: [
-      {
-        title: 'Knowledge-trained AI',
-        desc: 'Trained on your help docs, past tickets, and SOPs for accurate, on-brand responses.',
-      },
-      {
-        title: 'Helpdesk integration',
-        desc: 'Plugs into your existing helpdesk (Intercom, Zendesk, Freshdesk) — no migration needed.',
-      },
-      {
-        title: 'Smart escalation',
-        desc: 'When escalation is needed, it goes to the right person with full conversation context.',
-      },
-      {
-        title: 'Continuous improvement',
-        desc: 'System performance is monitored and knowledge base is updated as your product evolves.',
-      },
-    ],
-    tags: ['Ticket Automation', 'Helpdesk Integration', 'Knowledge Base', 'Escalation Logic', 'NLP'],
-  },
-  {
-    id: 'knowledge-base',
-    num: '04',
-    icon: BookOpen,
-    title: 'Internal Knowledge Base',
-    summary: 'Your processes, SOPs, and documentation — searchable and accessible.',
-    desc: 'We build internal AI knowledge systems that make your business knowledge retrievable. Instead of searching through Notion, Google Drive, and email threads, your team asks a question in plain language and gets an accurate answer with a source reference. Onboarding becomes faster. Expertise becomes institutional.',
-    features: [
-      {
-        title: 'Document ingestion',
-        desc: 'Connects to your existing documents: Notion, Google Drive, Confluence, PDFs, and more.',
-      },
-      {
-        title: 'Semantic search',
-        desc: 'Find information by meaning, not just keywords. Ask questions, get relevant answers.',
-      },
-      {
-        title: 'Source attribution',
-        desc: 'Every answer comes with a link to the source document so your team can verify.',
-      },
-      {
-        title: 'Slack or web interface',
-        desc: 'Deployed as a Slack bot, internal web tool, or embedded in your existing dashboard.',
-      },
-    ],
-    tags: ['Document AI', 'Semantic Search', 'Vector Database', 'Slack Integration', 'Access Control'],
-  },
-  {
-    id: 'crm-automation',
-    num: '05',
-    icon: Settings,
-    title: 'CRM & Workflow Automation',
-    summary: 'Connect your tools. Automate the steps between them.',
-    desc: 'We engineer cross-system workflows that eliminate the manual steps your team does between tools. When a deal reaches a certain stage in your CRM, a project is created automatically. When a payment is processed, a record updates. When a form is submitted, five things happen in sequence — without anyone clicking anything.',
-    features: [
-      {
-        title: 'API integration architecture',
-        desc: 'We connect your CRM, calendar, billing, email, and other tools via their APIs.',
-      },
-      {
-        title: 'Trigger-based workflows',
-        desc: 'Actions happen automatically in response to events — form submissions, deal stage changes, payments, and more.',
-      },
-      {
-        title: 'Bi-directional data sync',
-        desc: 'Data stays consistent across systems without manual intervention or reconciliation.',
-      },
-      {
-        title: 'Error handling and monitoring',
-        desc: 'Failed syncs are caught, logged, and flagged — not silently dropped.',
-      },
-    ],
-    tags: ['API Integration', 'Data Sync', 'Workflow Logic', 'CRM', 'No-code / Custom'],
-  },
-  {
-    id: 'custom-ai',
-    num: '06',
-    icon: Layers,
-    title: 'Custom AI Software',
-    summary: 'Purpose-built AI applications for specific operational challenges.',
-    desc: 'Some operational problems don\'t fit a template. We engineer custom AI software for the challenges that are specific to your industry, your process, or your business model. This includes LLM-powered internal tools, AI-assisted workflows, classification systems, document processing pipelines, and prediction systems tied to your data.',
-    features: [
-      {
-        title: 'LLM-powered applications',
-        desc: 'Custom interfaces and workflows built around GPT-4, Claude, or open-source models.',
-      },
-      {
-        title: 'Document processing',
-        desc: 'Extract, classify, and structure data from unstructured documents at scale.',
-      },
-      {
-        title: 'Custom training and fine-tuning',
-        desc: 'Adapt foundation models to your specific domain, terminology, and output format.',
-      },
-      {
-        title: 'Full-stack delivery',
-        desc: 'Frontend, backend, infrastructure, and integrations — built and deployed end to end.',
-      },
-    ],
-    tags: ['LLM Engineering', 'Custom Development', 'Fine-tuning', 'Infrastructure', 'RAG'],
-  },
-];
+function useTilt(active = true) {
+  const ref = useRef(null);
+  
+  useEffect(() => {
+    if (!active || !ref.current) return;
+    
+    const el = ref.current;
+    const handleMouseMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      
+      el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+    };
+    
+    const handleMouseLeave = () => {
+      el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+    };
+    
+    el.addEventListener('mousemove', handleMouseMove);
+    el.addEventListener('mouseleave', handleMouseLeave);
+    
+    return () => {
+      el.removeEventListener('mousemove', handleMouseMove);
+      el.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [active]);
+  
+  return ref;
+}
 
 export default function Services() {
   useEffect(() => {
@@ -173,105 +45,124 @@ export default function Services() {
       entries => entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('visible');
       }),
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
     const els = document.querySelectorAll('.reveal');
     els.forEach(el => observer.observe(el));
     return () => els.forEach(el => observer.unobserve(el));
   }, []);
 
+  const systems = [
+    {
+      id: 'ai-receptionist',
+      num: '01',
+      icon: Phone,
+      title: 'Voice AI Receptionist',
+      desc: 'An intelligent voice agent that handles inbound calls 24/7. It qualifies leads, books appointments directly into your calendar, and routes complex calls based on your specific logic.',
+      tech: ['Voice APIs', 'LLM Routing', 'Calendar Integrations']
+    },
+    {
+      id: 'support-automation',
+      num: '02',
+      icon: MessageSquare,
+      title: 'Intelligent Support Desk',
+      desc: 'An automated support pipeline that resolves routine tickets instantly using your internal knowledge base, escalating only edge cases to human agents with full conversation context.',
+      tech: ['Helpdesk APIs', 'Vector DB', 'Semantic Search']
+    },
+    {
+      id: 'data-sync',
+      num: '03',
+      icon: Settings,
+      title: 'Cross-Platform Workflows',
+      desc: 'Complex n8n or custom API workflows that eliminate manual data entry. When a lead is captured, five things happen perfectly in sequence across your CRM, Slack, and billing software.',
+      tech: ['n8n', 'Webhooks', 'REST/GraphQL']
+    },
+    {
+      id: 'custom-agents',
+      num: '04',
+      icon: Layers,
+      title: 'Bespoke Internal Tools',
+      desc: 'Purpose-built applications engineered for your unique operational bottlenecks. We build what templates cannot, giving you proprietary infrastructure.',
+      tech: ['React', 'Node.js', 'PostgreSQL', 'LangChain']
+    }
+  ];
+
   return (
-    <div className="services-page">
+    <main style={{ paddingTop: 'calc(var(--nav-h) + 60px)' }}>
       {/* Hero */}
-      <section className="services-hero">
+      <section style={{ paddingBottom: '80px' }}>
         <div className="container">
-          <div className="services-hero-inner reveal">
-            <span className="section-label">Systems we engineer</span>
-            <h1>AI systems built around<br />how your business operates.</h1>
-            <p>
-              Each system we build is engineered for a specific operational outcome.
-              Not a chatbot. Not an automation template. A system that becomes
-              part of how your business runs.
+          <div className="reveal">
+            <span className="section-label">Capabilities</span>
+            <h1 style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', marginBottom: '24px' }}>
+              Systems we engineer.
+            </h1>
+            <p style={{ fontSize: '1.2rem', color: 'var(--text-2)', maxWidth: '600px' }}>
+              We don't sell chatbots. We architect structural automation systems that become the 
+              invisible backbone of your business operations.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Full Service Cards */}
-      <div className="services-full-grid">
+      {/* Deep Dive Grid */}
+      <section style={{ paddingBottom: '120px' }}>
         <div className="container">
-          {services.map(service => {
-            const Icon = service.icon;
-            return (
-              <article
-                key={service.id}
-                id={service.id}
-                className="service-full-card reveal"
-              >
-                <div className="service-full-left">
-                  <div className="service-full-num">{service.num}</div>
-                  <div
-                    style={{
-                      width: 52, height: 52,
-                      background: 'var(--accent-dim)',
-                      border: '1px solid var(--border-accent)',
-                      borderRadius: 'var(--r-md)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      marginBottom: 20,
-                    }}
-                  >
-                    <Icon style={{ width: 22, height: 22, stroke: 'var(--accent)', fill: 'none', strokeWidth: 1.75 }} />
+          <div style={{ display: 'grid', gap: '40px', gridTemplateColumns: '1fr' }}>
+            {systems.map((sys, i) => {
+              const Icon = sys.icon;
+              const tiltRef = useTilt(true);
+              return (
+                <div 
+                  key={sys.id}
+                  ref={tiltRef}
+                  className="glass-panel reveal" 
+                  style={{ 
+                    padding: '48px', 
+                    display: 'grid', 
+                    gap: '32px',
+                    gridTemplateColumns: 'auto 1fr',
+                    alignItems: 'start',
+                    transitionDelay: `${(i % 2) * 100}ms`
+                  }}
+                >
+                  <div style={{ 
+                    width: '64px', height: '64px', 
+                    background: 'rgba(255,255,255,0.03)', 
+                    border: '1px solid var(--border)',
+                    borderRadius: 'var(--r-md)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: 'var(--accent)'
+                  }}>
+                    <Icon size={28} />
                   </div>
-                  <h2>{service.title}</h2>
-                  <p style={{ fontStyle: 'italic', color: 'var(--text-3)', marginBottom: 16 }}>
-                    {service.summary}
-                  </p>
-                  <p>{service.desc}</p>
-                  <div className="service-full-tags" style={{ marginTop: 24 }}>
-                    {service.tags.map(t => (
-                      <span key={t} className="solution-tag">{t}</span>
-                    ))}
+                  
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+                      <span style={{ fontFamily: 'Outfit', color: 'var(--accent)', fontWeight: 600 }}>{sys.num}</span>
+                      <h2 style={{ fontSize: '1.8rem' }}>{sys.title}</h2>
+                    </div>
+                    <p style={{ fontSize: '1.1rem', color: 'var(--text-2)', marginBottom: '24px', maxWidth: '700px' }}>
+                      {sys.desc}
+                    </p>
+                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                      {sys.tech.map(t => (
+                        <span key={t} style={{ 
+                          fontSize: '0.8rem', padding: '6px 12px', 
+                          background: 'var(--bg-darker)', border: '1px solid var(--border)',
+                          borderRadius: 'var(--r-sm)', color: 'var(--text-3)'
+                        }}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-
-                <div className="service-full-right">
-                  <div className="service-full-features">
-                    {service.features.map(f => (
-                      <div key={f.title} className="service-full-feature">
-                        <div className="service-full-feature-dot" />
-                        <div>
-                          <h4>{f.title}</h4>
-                          <p>{f.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* CTA */}
-      <section style={{ padding: '80px 0', borderTop: '1px solid var(--border)' }}>
-        <div className="container">
-          <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }} className="reveal">
-            <span className="section-label" style={{ justifyContent: 'center' }}>Next step</span>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', marginBottom: 16, fontWeight: 800, letterSpacing: '-0.03em' }}>
-              Not sure which system fits?
-            </h2>
-            <p style={{ marginBottom: 32 }}>
-              Book a discovery call. We'll review your operations and tell you exactly
-              what to build — and what not to build.
-            </p>
-            <Link to="/contact" className="btn btn-primary" id="services-cta" style={{ height: 52, padding: '0 28px', fontSize: '0.95rem' }}>
-              Book a Discovery Call
-              <ArrowRight size={17} />
-            </Link>
+              );
+            })}
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

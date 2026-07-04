@@ -21,76 +21,54 @@ export default function Footer() {
                 <text
                   x="0" y="28"
                   fontFamily="'Outfit', sans-serif"
-                  fontWeight="800" fontSize="28"
+                  fontWeight="800" fontSize="32"
                   fill="#FFFFFF" letterSpacing="-1"
                 >Auto</text>
                 <path
-                  d="M82 5 L73 20.5 H78.5 L71.5 33 L81.5 18 H76 L82 5Z"
+                  d="M86 4 L76 21 H82 L74 36 L86 19 H80 L86 4Z"
                   fill="#FF9500"
                   strokeLinejoin="round"
                 />
                 <text
-                  x="89" y="28"
+                  x="94" y="28"
                   fontFamily="'Outfit', sans-serif"
-                  fontWeight="800" fontSize="28"
+                  fontWeight="800" fontSize="32"
                   fill="#FFFFFF" letterSpacing="-1"
                 >Era</text>
               </svg>
             </Link>
             <p className="footer-brand-tagline">
-              We engineer AI systems that become part of how businesses operate.
+              Engineering AI automation systems and digital workflows that scale.
             </p>
           </div>
 
-          {/* Systems */}
+          {/* Platform */}
           <div className="footer-col">
-            <h4>Systems</h4>
-            <nav className="footer-links" aria-label="Systems navigation">
-              <Link to="/services#ai-receptionist" className="footer-link">AI Receptionist</Link>
-              <Link to="/services#lead-response" className="footer-link">Lead Response</Link>
-              <Link to="/services#customer-support" className="footer-link">Customer Support</Link>
-              <Link to="/services#knowledge-base" className="footer-link">Knowledge Base</Link>
-              <Link to="/services#crm-automation" className="footer-link">CRM Automation</Link>
-              <Link to="/services#custom-ai" className="footer-link">Custom AI Software</Link>
+            <h4 style={{ color: 'var(--text-main)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Platform</h4>
+            <nav className="footer-links" aria-label="Platform navigation">
+              <Link to="/services" className="footer-link">Systems & Services</Link>
+              <Link to="/portfolio" className="footer-link">Case Studies</Link>
+              <Link to="/about" className="footer-link">About the Studio</Link>
+              <Link to="/blog" className="footer-link">Engineering Notes</Link>
             </nav>
           </div>
 
-          {/* Company */}
+          {/* Connect */}
           <div className="footer-col">
-            <h4>Company</h4>
-            <nav className="footer-links" aria-label="Company navigation">
-              <Link to="/about" className="footer-link">About</Link>
-              <Link to="/contact" className="footer-link">Contact</Link>
-              <Link to="/contact" className="footer-link">Book a Call</Link>
-            </nav>
-          </div>
-
-          {/* Contact */}
-          <div className="footer-col">
-            <h4>Connect</h4>
+            <h4 style={{ color: 'var(--text-main)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Connect</h4>
             <nav className="footer-links" aria-label="Connect navigation">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="mailto:hello@autoera.io"
-                className="footer-link"
-              >
-                hello@autoera.io
-              </a>
+              <Link to="/contact" className="footer-link">Start a Project</Link>
+              <a href="mailto:hello@autoera.io" className="footer-link">hello@autoera.io</a>
+              <a href="#" className="footer-link">LinkedIn</a>
+              <a href="#" className="footer-link">Twitter / X</a>
             </nav>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="footer-bottom">
-          <p className="footer-copy">
-            © {year} AutoEra. All rights reserved.
+          <p style={{ color: 'var(--text-3)' }}>
+            © {year} AutoEra Engineering Studio. All rights reserved.
           </p>
           <div className="footer-status">
             <span className="footer-status-dot" />
