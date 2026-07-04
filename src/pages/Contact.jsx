@@ -29,7 +29,9 @@ export default function Contact() {
   const timeline = [
     { icon: PhoneCall, title: 'Discovery Call', desc: 'We map your existing operations.' },
     { icon: Code2, title: 'Architecture Proposal', desc: 'System design and resource scoping.' },
-    { icon: Rocket, title: 'Deployment', desc: 'Iterative build and go-live.' }
+    { icon: Rocket, title: 'Development', desc: 'Iterative agile build.' },
+    { icon: Check, title: 'Testing & Deployment', desc: 'Rigorous Q&A and final go-live.' },
+    { icon: Send, title: 'Continuous Improvement', desc: 'Ongoing optimization and scaling support.' }
   ];
 
   return (

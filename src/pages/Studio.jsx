@@ -51,7 +51,7 @@ export default function Studio() {
         <section>
           <div className="reveal" style={{ marginBottom: '60px' }}>
             <span className="tech-label">PROCESS_TOPOLOGY</span>
-            <h2 style={{ fontSize: '2.5rem' }}>How We Think</h2>
+            <h2 style={{ fontSize: '2.5rem' }}>Our Engineering Mindset</h2>
             <p style={{ color: 'var(--text-2)', marginTop: '16px', fontSize: '1.1rem' }}>Our methodology for transforming chaotic operations into reliable systems.</p>
           </div>
 

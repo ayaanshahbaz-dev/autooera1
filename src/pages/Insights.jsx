@@ -17,25 +17,25 @@ export default function Insights() {
 
   const articles = [
     {
-      slug: 'why-n8n-beats-zapier-for-enterprise',
-      title: 'Why we use n8n over Zapier for production-grade automation',
+      slug: 'why-we-chose-django',
+      title: 'Why we chose Django for production backend engineering',
       date: 'Oct 12, 2026',
       readTime: '6 min read',
       tag: 'Architecture'
     },
     {
-      slug: 'structuring-llm-outputs-json',
-      title: 'Forcing LLMs to output reliable JSON for API webhooks',
+      slug: 'structuring-apis-for-growth',
+      title: 'Structuring APIs for growth: the decoupled backend',
       date: 'Sep 28, 2026',
       readTime: '4 min read',
-      tag: 'AI Engineering'
+      tag: 'System Design'
     },
     {
-      slug: 'the-death-of-manual-data-entry',
-      title: 'The death of manual data entry: CRM sync strategies',
+      slug: 'integrating-ai-into-existing-workflows',
+      title: 'Integrating AI into existing workflows safely',
       date: 'Sep 15, 2026',
       readTime: '8 min read',
-      tag: 'System Design'
+      tag: 'AI Engineering'
     }
   ];
 
