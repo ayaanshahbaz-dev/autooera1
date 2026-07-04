@@ -29,17 +29,14 @@ export default function Navigation() {
     <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`} role="navigation">
         <div className="container nav-inner">
-          <Link to="/" className="nav-logo" aria-label="AutoEra Engineering Studio">
-            <svg
-              viewBox="0 0 176 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ height: '24px', width: 'auto' }}
-            >
-              <text x="0" y="28" fontFamily="'Inter', sans-serif" fontWeight="700" fontSize="32" fill="#FFFFFF" letterSpacing="-1">Auto</text>
-              <path d="M86 4 L76 21 H82 L74 36 L86 19 H80 L86 4Z" fill="var(--logo-orange)" strokeLinejoin="round" />
-              <text x="94" y="28" fontFamily="'Inter', sans-serif" fontWeight="700" fontSize="32" fill="#FFFFFF" letterSpacing="-1">Era</text>
+          <Link to="/" className="nav-logo" aria-label="AutoEra Engineering Studio" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}>
+            <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: '28px', width: 'auto' }}>
+              <path d="M14 0 L2 18 H10 L8 32 L22 14 H14 L14 0Z" fill="var(--logo-orange)" strokeLinejoin="round" />
             </svg>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: "700", fontSize: "1.6rem", color: "#FFFFFF", letterSpacing: "-0.03em" }}>AutoEra</span>
+              <span style={{ fontFamily: "'SF Mono', monospace", fontSize: "0.75rem", color: "var(--text-3)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Engineering Studio</span>
+            </div>
           </Link>
 
           <div className="nav-links">

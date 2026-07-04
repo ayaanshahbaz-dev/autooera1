@@ -163,6 +163,45 @@
   }
 
   /* Interactive Elements */
+  .hero-btn-primary {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .hero-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.4);
+    background: #33ffff !important;
+  }
+  .hero-btn-primary svg {
+    transition: transform 0.3s ease;
+  }
+  .hero-btn-primary:hover svg {
+    transform: translateX(4px);
+  }
+
+  .hero-btn-outline {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .hero-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: #fff !important;
+    transform: translateY(-2px);
+  }
+
+  .cap-block {
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+  .cap-block:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .cap-block:hover svg {
+    filter: drop-shadow(0 0 8px var(--accent));
+    transform: scale(1.1);
+  }
+  .cap-block svg {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .hero-node {
     width: 64px;
     height: 80px;

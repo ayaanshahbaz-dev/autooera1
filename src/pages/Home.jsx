@@ -120,10 +120,10 @@ export default function Home() {
               </p>
               
               <div style={{ display: 'flex', gap: '16px' }}>
-                <Link to="/solutions" className="btn btn-primary" style={{ background: 'var(--accent)', color: '#000', padding: '0 32px', height: '48px', fontWeight: 600 }}>
+                <Link to="/solutions" className="btn btn-primary hero-btn-primary" style={{ background: 'var(--accent)', color: '#000', padding: '0 32px', height: '48px', fontWeight: 600 }}>
                   Explore Our Systems <ArrowRight size={16} />
                 </Link>
-                <Link to="/work" className="btn btn-outline" style={{ padding: '0 32px', height: '48px' }}>
+                <Link to="/work" className="btn btn-outline hero-btn-outline" style={{ padding: '0 32px', height: '48px' }}>
                   View Engineering Case Studies
                 </Link>
               </div>
@@ -141,9 +141,9 @@ export default function Home() {
       {/* ================= ENGINEERING CAPABILITIES ================= */}
       <section style={{ padding: '0 0 60px 0' }}>
         <div className="container" style={{ maxWidth: '1400px' }}>
-          <div className="eng-panel reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', background: '#0a0a0a', border: '1px solid #1a1a1a', borderRadius: 'var(--r-md)' }}>
+          <div className="eng-panel reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', background: 'linear-gradient(145deg, #16161a 0%, #050505 100%)', border: '1px solid #222', borderRadius: 'var(--r-md)' }}>
             
-            <div style={{ padding: '32px', display: 'flex', gap: '20px', borderRight: '1px solid #1a1a1a' }}>
+            <div className="cap-block" style={{ padding: '32px', display: 'flex', gap: '20px', borderRight: '1px solid #222' }}>
               <ShieldCheck size={32} style={{ color: 'var(--accent)', flexShrink: 0 }} />
               <div>
                 <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '8px' }}>Architecture First</div>
@@ -151,7 +151,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div style={{ padding: '32px', display: 'flex', gap: '20px', borderRight: '1px solid #1a1a1a' }}>
+            <div className="cap-block" style={{ padding: '32px', display: 'flex', gap: '20px', borderRight: '1px solid #222' }}>
               <Layers size={32} style={{ color: 'var(--accent)', flexShrink: 0 }} />
               <div>
                 <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '8px' }}>Scalable by Design</div>
@@ -159,7 +159,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div style={{ padding: '32px', display: 'flex', gap: '20px', borderRight: '1px solid #1a1a1a' }}>
+            <div className="cap-block" style={{ padding: '32px', display: 'flex', gap: '20px', borderRight: '1px solid #222' }}>
               <Code size={32} style={{ color: 'var(--accent)', flexShrink: 0 }} />
               <div>
                 <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '8px' }}>API Driven</div>
@@ -167,7 +167,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div style={{ padding: '32px', display: 'flex', gap: '20px' }}>
+            <div className="cap-block" style={{ padding: '32px', display: 'flex', gap: '20px' }}>
               <Lock size={32} style={{ color: 'var(--accent)', flexShrink: 0 }} />
               <div>
                 <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '8px' }}>Security Focused</div>
