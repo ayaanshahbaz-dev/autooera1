@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,8 +55,8 @@ export default function Navigation() {
             <Link to="/contact" className="btn btn-primary" style={{ display: 'none' }}>
               Contact
             </Link>
-            <Link to="/contact" className="btn btn-outline" style={{ fontSize: '0.85rem' }}>
-              Book Discovery Call
+            <Link to="/contact" className="nav-cta-btn">
+              Book Discovery Call <ArrowRight size={14} />
             </Link>
 
             <button
