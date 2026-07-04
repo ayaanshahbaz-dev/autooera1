@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { writeFileSync } from 'fs';
+
+const code = `import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   User, Brain, Database, Settings, BarChart, LineChart, Users,
@@ -13,13 +15,13 @@ import {
 function SystemDiagram() {
   const [activeNode, setActiveNode] = useState(null);
   const nodes = [
-    { id: 'capture',    label: 'Lead\nCapture',        icon: User,      desc: 'All inbound leads captured automatically — no manual entry.' },
-    { id: 'ai',         label: 'AI\nQualification',    icon: Brain,     desc: 'AI scores and qualifies leads by industry, intent and budget.' },
-    { id: 'crm',        label: 'CRM\nSync',            icon: Database,  desc: 'Qualified leads synced to your CRM in real time.' },
-    { id: 'automation', label: 'Automation\nEngine',   icon: Settings,  desc: 'Workflows trigger follow-ups, tasks and notifications instantly.' },
-    { id: 'dashboard',  label: 'Dashboard\n& Reports', icon: BarChart,  desc: 'Real-time visibility into pipeline health and conversion rates.' },
-    { id: 'analytics',  label: 'Analytics\n& Insights',icon: LineChart, desc: 'AI-powered insights reveal bottlenecks and growth opportunities.' },
-    { id: 'team',       label: 'Your\nTeam',           icon: Users,     desc: 'Your team works from one unified platform, not ten tabs.' },
+    { id: 'capture',    label: 'Lead\\nCapture',        icon: User,      desc: 'All inbound leads captured automatically — no manual entry.' },
+    { id: 'ai',         label: 'AI\\nQualification',    icon: Brain,     desc: 'AI scores and qualifies leads by industry, intent and budget.' },
+    { id: 'crm',        label: 'CRM\\nSync',            icon: Database,  desc: 'Qualified leads synced to your CRM in real time.' },
+    { id: 'automation', label: 'Automation\\nEngine',   icon: Settings,  desc: 'Workflows trigger follow-ups, tasks and notifications instantly.' },
+    { id: 'dashboard',  label: 'Dashboard\\n& Reports', icon: BarChart,  desc: 'Real-time visibility into pipeline health and conversion rates.' },
+    { id: 'analytics',  label: 'Analytics\\n& Insights',icon: LineChart, desc: 'AI-powered insights reveal bottlenecks and growth opportunities.' },
+    { id: 'team',       label: 'Your\\nTeam',           icon: Users,     desc: 'Your team works from one unified platform, not ten tabs.' },
   ];
 
   return (
@@ -49,7 +51,7 @@ function SystemDiagram() {
                 onMouseEnter={() => setActiveNode(node.id)}
                 onMouseLeave={() => setActiveNode(null)}
               >
-                <div style={{ width: '58px', height: '72px', background: isActive ? 'rgba(0,229,255,0.1)' : '#060606', border: `1px solid ${isActive ? 'rgba(0,229,255,0.8)' : 'rgba(0,229,255,0.25)'}`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: isActive ? '0 0 25px rgba(0,229,255,0.25), inset 0 0 20px rgba(0,229,255,0.1)' : 'inset 0 0 20px rgba(0,229,255,0.04)', transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)', transform: isActive ? 'translateY(-6px) scale(1.08)' : 'none' }}>
+                <div style={{ width: '58px', height: '72px', background: isActive ? 'rgba(0,229,255,0.1)' : '#060606', border: \`1px solid \${isActive ? 'rgba(0,229,255,0.8)' : 'rgba(0,229,255,0.25)'}\`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: isActive ? '0 0 25px rgba(0,229,255,0.25), inset 0 0 20px rgba(0,229,255,0.1)' : 'inset 0 0 20px rgba(0,229,255,0.04)', transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)', transform: isActive ? 'translateY(-6px) scale(1.08)' : 'none' }}>
                   <Icon size={24} style={{ color: isActive ? 'var(--accent)' : '#666', transition: 'color 0.3s ease' }} />
                 </div>
                 <div style={{ color: isActive ? 'var(--text-main)' : 'var(--text-3)', fontSize: '0.68rem', textAlign: 'center', whiteSpace: 'pre-line', lineHeight: 1.3, transition: 'color 0.3s ease' }}>
@@ -60,13 +62,13 @@ function SystemDiagram() {
           })}
         </div>
       </div>
-      <div style={{ minHeight: '52px', background: activeNode ? '#0d0d0d' : 'transparent', border: `1px solid ${activeNode ? 'rgba(0,229,255,0.2)' : 'transparent'}`, borderRadius: '8px', padding: '14px 24px', fontSize: '0.88rem', color: 'var(--text-2)', textAlign: 'center', transition: 'all 0.3s ease', maxWidth: '480px' }}>
+      <div style={{ minHeight: '52px', background: activeNode ? '#0d0d0d' : 'transparent', border: \`1px solid \${activeNode ? 'rgba(0,229,255,0.2)' : 'transparent'}\`, borderRadius: '8px', padding: '14px 24px', fontSize: '0.88rem', color: 'var(--text-2)', textAlign: 'center', transition: 'all 0.3s ease', maxWidth: '480px' }}>
         {activeNode ? nodes.find(n => n.id === activeNode)?.desc : <span style={{ color: 'var(--text-3)', fontSize: '0.78rem' }}>Hover a node to explore the system</span>}
       </div>
-      <style>{`
+      <style>{\`
         @keyframes dataFlow { 0%{left:0;opacity:0} 5%{opacity:1} 95%{opacity:1} 100%{left:100%;opacity:0} }
         @keyframes pulseDot { 0%,100%{box-shadow:0 0 0 0 rgba(0,229,255,0.4)} 70%{box-shadow:0 0 0 6px rgba(0,229,255,0)} }
-      `}</style>
+      \`}</style>
     </div>
   );
 }
@@ -95,8 +97,8 @@ function ArchitectureFlow() {
           const isActive = activeStep === i;
           return (
             <div key={i}>
-              <div onClick={() => setActiveStep(i)} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '14px 18px', borderRadius: '10px', background: isActive ? 'rgba(0,229,255,0.06)' : 'transparent', border: `1px solid ${isActive ? 'rgba(0,229,255,0.25)' : 'transparent'}`, cursor: 'pointer', transition: 'all 0.25s ease' }}>
-                <div style={{ width: '38px', height: '38px', flexShrink: 0, borderRadius: '8px', background: isActive ? 'rgba(0,229,255,0.12)' : '#111', border: `1px solid ${isActive ? 'rgba(0,229,255,0.4)' : '#222'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease' }}>
+              <div onClick={() => setActiveStep(i)} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '14px 18px', borderRadius: '10px', background: isActive ? 'rgba(0,229,255,0.06)' : 'transparent', border: \`1px solid \${isActive ? 'rgba(0,229,255,0.25)' : 'transparent'}\`, cursor: 'pointer', transition: 'all 0.25s ease' }}>
+                <div style={{ width: '38px', height: '38px', flexShrink: 0, borderRadius: '8px', background: isActive ? 'rgba(0,229,255,0.12)' : '#111', border: \`1px solid \${isActive ? 'rgba(0,229,255,0.4)' : '#222'}\`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.25s ease' }}>
                   <Icon size={16} style={{ color: isActive ? step.color : '#555' }} />
                 </div>
                 <span style={{ fontWeight: isActive ? 600 : 400, color: isActive ? 'var(--text-main)' : 'var(--text-3)', fontSize: '0.95rem', transition: 'color 0.25s ease' }}>{step.label}</span>
@@ -284,11 +286,11 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
             {systems.map((sys, i) => (
-              <div key={i} className="reveal eng-panel" style={{ padding: '40px', background: 'linear-gradient(145deg, #111 0%, #080808 100%)', border: '1px solid #1a1a1a', transitionDelay: `${i * 80}ms`, position: 'relative', overflow: 'hidden', transition: 'all 0.3s ease' }}
+              <div key={i} className="reveal eng-panel" style={{ padding: '40px', background: 'linear-gradient(145deg, #111 0%, #080808 100%)', border: '1px solid #1a1a1a', transitionDelay: \`\${i * 80}ms\`, position: 'relative', overflow: 'hidden', transition: 'all 0.3s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = sys.accent + '50'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = '#1a1a1a'; e.currentTarget.style.transform = 'none'; }}
               >
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(90deg, ${sys.accent}, transparent)`, opacity: 0.7 }} />
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: \`linear-gradient(90deg, \${sys.accent}, transparent)\`, opacity: 0.7 }} />
                 <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', marginBottom: '8px', letterSpacing: '-0.02em' }}>{sys.name}</h3>
                 <p style={{ color: sys.accent, fontSize: '0.95rem', fontWeight: 600, marginBottom: '16px' }}>{sys.purpose}</p>
                 <p style={{ color: 'var(--text-3)', fontSize: '0.72rem', marginBottom: '14px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{sys.industries}</p>
@@ -329,11 +331,11 @@ export default function Home() {
             <div style={{ background: '#111', padding: '18px 32px', borderBottom: '1px solid #1a1a1a', borderRight: '1px solid #1a1a1a' }}><span style={{ color: 'var(--text-3)', fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Traditional Approach</span></div>
             <div style={{ background: 'rgba(0,229,255,0.04)', padding: '18px 32px', borderBottom: '1px solid rgba(0,229,255,0.15)' }}><span style={{ color: 'var(--accent)', fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>AutoEra</span></div>
             {comparison.map(([before, after], i) => (<>
-              <div key={`b${i}`} style={{ background: '#0a0a0a', padding: '18px 32px', borderBottom: i < comparison.length-1 ? '1px solid #111' : 'none', borderRight: '1px solid #1a1a1a', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div key={\`b\${i}\`} style={{ background: '#0a0a0a', padding: '18px 32px', borderBottom: i < comparison.length-1 ? '1px solid #111' : 'none', borderRight: '1px solid #1a1a1a', display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span style={{ color: '#333', fontSize: '0.8rem', flexShrink: 0 }}>✕</span>
                 <span style={{ color: 'var(--text-3)', fontSize: '0.9rem' }}>{before}</span>
               </div>
-              <div key={`a${i}`} style={{ background: 'rgba(0,229,255,0.02)', padding: '18px 32px', borderBottom: i < comparison.length-1 ? '1px solid rgba(0,229,255,0.08)' : 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div key={\`a\${i}\`} style={{ background: 'rgba(0,229,255,0.02)', padding: '18px 32px', borderBottom: i < comparison.length-1 ? '1px solid rgba(0,229,255,0.08)' : 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <CheckCircle2 size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
                 <span style={{ color: 'var(--text-main)', fontSize: '0.9rem' }}>{after}</span>
               </div>
@@ -351,7 +353,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
             {process.map((p, i) => (
-              <div key={i} className="reveal eng-panel" style={{ padding: '28px', background: 'linear-gradient(145deg, #0e0e0e, #060606)', transitionDelay: `${i * 50}ms`, transition: 'all 0.3s ease', cursor: 'default' }}
+              <div key={i} className="reveal eng-panel" style={{ padding: '28px', background: 'linear-gradient(145deg, #0e0e0e, #060606)', transitionDelay: \`\${i * 50}ms\`, transition: 'all 0.3s ease', cursor: 'default' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,229,255,0.2)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none'; }}
               >
@@ -373,7 +375,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
             {standards.map(([title, desc], i) => (
-              <div key={i} className="reveal" style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', padding: '22px 0', borderBottom: i < standards.length-2 ? '1px solid #111' : 'none', paddingRight: i % 2 === 0 ? '48px' : '0', paddingLeft: i % 2 === 1 ? '48px' : '0', borderLeft: i % 2 === 1 ? '1px solid #111' : 'none', transitionDelay: `${i * 40}ms` }}>
+              <div key={i} className="reveal" style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', padding: '22px 0', borderBottom: i < standards.length-2 ? '1px solid #111' : 'none', paddingRight: i % 2 === 0 ? '48px' : '0', paddingLeft: i % 2 === 1 ? '48px' : '0', borderLeft: i % 2 === 1 ? '1px solid #111' : 'none', transitionDelay: \`\${i * 40}ms\` }}>
                 <CheckCircle2 size={16} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '3px' }} />
                 <div><span style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '0.92rem' }}>{title}</span><span style={{ color: 'var(--text-3)', fontSize: '0.85rem' }}> — {desc}</span></div>
               </div>
@@ -446,7 +448,7 @@ export default function Home() {
                   <span style={{ fontFamily: "'SF Mono', monospace", fontSize: '0.66rem', background: '#1a1a1a', padding: '2px 8px', borderRadius: '4px', color: 'var(--text-3)' }}>{version}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: statusColor, boxShadow: status === 'Production' ? `0 0 8px ${statusColor}` : 'none' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: statusColor, boxShadow: status === 'Production' ? \`0 0 8px \${statusColor}\` : 'none' }} />
                   <span style={{ fontSize: '0.8rem', color: statusColor, fontWeight: 500 }}>{status}</span>
                 </div>
               </div>
@@ -464,11 +466,11 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
             {industries.map(({ icon: Icon, name, pain, system, accent }, i) => (
-              <div key={i} className="reveal eng-panel" style={{ padding: '36px', background: 'linear-gradient(145deg, #0e0e0e, #070707)', transitionDelay: `${i * 60}ms`, transition: 'all 0.3s ease', cursor: 'default' }}
+              <div key={i} className="reveal eng-panel" style={{ padding: '36px', background: 'linear-gradient(145deg, #0e0e0e, #070707)', transitionDelay: \`\${i * 60}ms\`, transition: 'all 0.3s ease', cursor: 'default' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = accent + '40'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none'; }}
               >
-                <div style={{ width: '46px', height: '46px', background: accent + '12', border: `1px solid ${accent}30`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '18px' }}>
+                <div style={{ width: '46px', height: '46px', background: accent + '12', border: \`1px solid \${accent}30\`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '18px' }}>
                   <Icon size={20} style={{ color: accent }} />
                 </div>
                 <h3 style={{ fontSize: '1.15rem', marginBottom: '10px', color: 'var(--text-main)' }}>{name}</h3>
@@ -492,7 +494,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
             {insights.map((post, i) => (
-              <Link key={i} to={`/insights/${post.slug}`} className="reveal eng-panel" style={{ padding: '32px', background: 'linear-gradient(145deg, #0e0e0e, #070707)', display: 'block', textDecoration: 'none', transitionDelay: `${i * 80}ms`, transition: 'all 0.3s ease' }}
+              <Link key={i} to={\`/insights/\${post.slug}\`} className="reveal eng-panel" style={{ padding: '32px', background: 'linear-gradient(145deg, #0e0e0e, #070707)', display: 'block', textDecoration: 'none', transitionDelay: \`\${i * 80}ms\`, transition: 'all 0.3s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,229,255,0.2)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none'; }}
               >
@@ -552,3 +554,7 @@ export default function Home() {
     </main>
   );
 }
+`;
+
+writeFileSync('d:/AutoEra/AutoEra Website V2/src/pages/Home.jsx', code, 'utf8');
+console.log('✓ Home.jsx written successfully');
