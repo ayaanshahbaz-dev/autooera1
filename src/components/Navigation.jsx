@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -13,79 +11,86 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location]);
-
   const links = [
-    { name: 'Solutions', path: '/solutions' },
-    { name: 'Engineering', path: '/engineering' },
-    { name: 'Work', path: '/work' },
-    { name: 'Studio', path: '/studio' },
-    { name: 'Demo Center', path: '/demo' },
+    { name: 'Systems', path: '#systems' },
+    { name: 'Process', path: '#process' },
+    { name: 'Projects', path: '#projects' },
+    { name: 'FAQ', path: '#faq' },
   ];
 
   return (
     <>
-      <nav className={`nav ${scrolled ? 'scrolled' : ''}`} role="navigation">
-        <div className="container nav-inner">
-          <Link to="/" className="nav-logo" aria-label="AutoEra Engineering Studio" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}>
-            <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: '28px', width: 'auto' }}>
-              <path d="M14 0 L2 18 H10 L8 32 L22 14 H14 L14 0Z" fill="var(--logo-orange)" strokeLinejoin="round" />
+      <nav 
+        className={`fixed top-0 left-0 right-0 h-[var(--nav-h)] z-50 transition-all duration-300 border-b border-transparent ${
+          scrolled ? 'bg-bg-primary/80 backdrop-blur-md !border-border-subtle' : ''
+        }`}
+        role="navigation"
+      >
+        <div className="container h-full flex items-center justify-between">
+          <a href="#" className="flex items-center gap-4 text-text-primary group" aria-label="AutoEra Engineering Studio">
+            <svg viewBox="0 0 24 32" fill="none" className="h-7 w-auto">
+              <path d="M14 0 L2 18 H10 L8 32 L22 14 H14 L14 0Z" fill="var(--accent)" strokeLinejoin="round" />
             </svg>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: "700", fontSize: "1.6rem", color: "#FFFFFF", letterSpacing: "-0.03em" }}>AutoEra</span>
-              <span style={{ fontFamily: "'SF Mono', monospace", fontSize: "0.75rem", color: "var(--text-3)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Engineering Studio</span>
+            <div className="flex items-baseline gap-4">
+              <span className="font-sans font-bold text-2xl tracking-tight">AutoEra</span>
+              <span className="font-mono text-xs text-text-tertiary tracking-widest uppercase hidden sm:block">Engineering Studio</span>
             </div>
-          </Link>
+          </a>
 
-          <div className="nav-links">
+          <div className="hidden md:flex gap-8">
             {links.map(({ name, path }) => (
-              <NavLink
+              <a
                 key={name}
-                to={path}
-                className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+                href={path}
+                className="text-[0.85rem] font-medium text-text-secondary hover:text-text-primary transition-colors"
               >
                 {name}
-              </NavLink>
+              </a>
             ))}
           </div>
 
-          <div className="nav-right">
-            <Link to="/contact" className="btn btn-primary" style={{ display: 'none' }}>
-              Contact
-            </Link>
-            <Link to="/contact" className="nav-cta-btn">
+          <div className="flex items-center gap-4">
+            <a 
+              href="#cta" 
+              className="hidden md:flex items-center gap-2 px-5 h-10 rounded-md border border-accent text-accent bg-accent-dim hover:bg-accent-glow/20 transition-all text-[0.85rem] font-medium"
+            >
               Book Discovery Call <ArrowRight size={14} />
-            </Link>
+            </a>
 
             <button
-              className="nav-hamburger"
-              style={{ display: 'block' }}
+              className="md:hidden text-text-secondary"
               onClick={() => setMobileOpen(o => !o)}
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-            <style>{`@media (min-width: 768px) { .nav-hamburger { display: none !important; } }`}</style>
           </div>
         </div>
       </nav>
 
-      <div className="nav-drawer" style={{
-        position: 'fixed', top: 'var(--nav-h)', left: 0, right: 0, bottom: 0,
-        background: 'var(--bg-dark)', padding: '24px', display: 'flex',
-        flexDirection: 'column', gap: '24px', transform: mobileOpen ? 'translateY(0)' : 'translateY(-100%)',
-        opacity: mobileOpen ? 1 : 0, transition: 'var(--t-smooth)', zIndex: 90, pointerEvents: mobileOpen ? 'all' : 'none'
-      }}>
+      {/* Mobile Drawer */}
+      <div 
+        className={`fixed inset-0 top-[var(--nav-h)] bg-bg-primary p-6 flex flex-col gap-6 z-40 transition-all duration-300 ${
+          mobileOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'
+        }`}
+      >
         {links.map(({ name, path }) => (
-          <NavLink key={name} to={path} style={{ fontSize: '1.2rem', color: 'var(--text-main)', textDecoration: 'none', fontWeight: 500 }}>
+          <a 
+            key={name} 
+            href={path} 
+            onClick={() => setMobileOpen(false)}
+            className="text-xl font-medium text-text-primary"
+          >
             {name}
-          </NavLink>
+          </a>
         ))}
-        <div style={{ height: '1px', background: 'var(--border)', margin: '10px 0' }}></div>
-        <Link to="/contact" className="btn btn-primary" style={{ justifyContent: 'center' }}>
+        <div className="h-px bg-border-subtle my-2"></div>
+        <a 
+          href="#cta"
+          onClick={() => setMobileOpen(false)}
+          className="flex justify-center items-center h-12 bg-text-primary text-bg-primary rounded-md font-medium"
+        >
           Book Discovery Call
-        </Link>
+        </a>
       </div>
     </>
   );

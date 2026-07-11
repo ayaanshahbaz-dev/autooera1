@@ -1,35 +1,23 @@
-import { Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
-
-// Pages
-import Home from './pages/Home';
-import Solutions from './pages/Solutions';
-import Engineering from './pages/Engineering';
-import Work from './pages/Work';
-import CaseStudy from './pages/CaseStudy';
-import Studio from './pages/Studio';
-import Insights from './pages/Insights';
-import InsightPost from './pages/InsightPost';
-import Contact from './pages/Contact';
-import Demo from './pages/Demo';
+import Hero from './sections/Hero';
+import TechGrid from './sections/TechGrid';
+import Problem from './sections/Problem';
+import Systems from './sections/Systems';
 
 function App() {
   return (
-    <div className="app-container">
+    <div className="flex flex-col min-h-screen bg-bg-primary text-text-secondary font-sans selection:bg-accent-dim selection:text-accent">
       <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/solutions" element={<Solutions />} />
-        <Route path="/engineering" element={<Engineering />} />
-        <Route path="/work" element={<Work />} />
-        <Route path="/work/:id" element={<CaseStudy />} />
-        <Route path="/studio" element={<Studio />} />
-        <Route path="/insights" element={<Insights />} />
-        <Route path="/insights/:slug" element={<InsightPost />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/demo" element={<Demo />} />
-      </Routes>
+      
+      <main className="flex-1">
+        <Hero />
+        <TechGrid />
+        <Problem />
+        <Systems />
+        {/* Next sections will go here */}
+      </main>
+      
       <Footer />
     </div>
   );
