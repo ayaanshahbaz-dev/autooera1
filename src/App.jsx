@@ -4,6 +4,14 @@ import Hero from './sections/Hero';
 import TechGrid from './sections/TechGrid';
 import Problem from './sections/Problem';
 import Systems from './sections/Systems';
+import ConnectedSystem from './sections/ConnectedSystem';
+import AutomationFlow from './sections/AutomationFlow';
+import Process from './sections/Process';
+import Projects from './sections/Projects';
+import Capabilities from './sections/Capabilities';
+import Pricing from './sections/Pricing';
+import Testimonials from './sections/Testimonials';
+import Faq from './sections/Faq';
 
 function App() {
   return (
@@ -15,7 +23,14 @@ function App() {
         <TechGrid />
         <Problem />
         <Systems />
-        {/* Next sections will go here */}
+        <ConnectedSystem />
+        <AutomationFlow />
+        <Process />
+        <Projects />
+        <Capabilities />
+        <Pricing />
+        <Testimonials />
+        <Faq />
       </main>
       
       <Footer />
