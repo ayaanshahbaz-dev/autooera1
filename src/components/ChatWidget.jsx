@@ -9,7 +9,7 @@ export default function ChatWidget() {
     {
       id: 1,
       type: 'bot',
-      text: "Hi there! 👋 Welcome to AutoEra. I'm your AI assistant. How can I help you scale your digital infrastructure today?",
+      text: "Hi, I'm AURA! 👋 AutoEra's AI Business Consultant — ask me anything, or let's find the right system for your business.",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -208,13 +208,11 @@ export default function ChatWidget() {
                   <div className="flex items-center justify-between p-5 pb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center text-accent">
-                        <svg viewBox="0 0 176 38" fill="none" className="h-4 w-auto">
-                          <path d="M86 4 L76 21 H82 L74 36 L86 19 H80 L86 4Z" fill="currentColor" strokeLinejoin="round" />
-                        </svg>
+                        <Bot size={20} className="ml-[-1px] mt-[1px]" />
                       </div>
                       <div>
-                        <p className="font-bold text-white text-base font-heading">AutoEra</p>
-                        <p className="text-[9px] font-bold text-accent tracking-widest uppercase">Support & Services</p>
+                        <p className="font-bold text-white text-base font-heading">AURA</p>
+                        <p className="text-[9px] font-bold text-accent tracking-widest uppercase">AI Business Consultant</p>
                       </div>
                     </div>
                     <motion.button 
@@ -229,9 +227,9 @@ export default function ChatWidget() {
                   </div>
 
                   <div className="px-5 pt-2 pb-6 flex-1 overflow-y-auto">
-                    <h2 className="text-2xl font-bold text-white mb-2 font-heading tracking-tight">Hi there 👋</h2>
+                    <h2 className="text-2xl font-bold text-white mb-2 font-heading tracking-tight">Hi, I'm AURA 👋</h2>
                     <p className="text-text-secondary text-sm mb-6 leading-relaxed max-w-[280px]">
-                      How can we help you scale your business systems today?
+                      AutoEra's AI Business Consultant — ask me anything, or let's find the right system for your business.
                     </p>
 
                     {/* Primary CTA */}
@@ -288,8 +286,8 @@ export default function ChatWidget() {
                       <ChevronLeft size={20} className="mr-0.5" aria-hidden="true" />
                     </motion.button>
                     <div className="flex flex-col items-center">
-                      <h2 className="font-bold text-white text-[15px] font-heading tracking-tight">Conversation</h2>
-                      <p className="text-[9px] font-bold text-accent tracking-widest uppercase">AI Architect</p>
+                      <h2 className="font-bold text-white text-[15px] font-heading tracking-tight">AURA</h2>
+                      <p className="text-[9px] font-bold text-accent tracking-widest uppercase">AI Business Consultant</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <motion.button 
@@ -315,7 +313,7 @@ export default function ChatWidget() {
                   {/* Secure Connection Pill */}
                   <div className="flex justify-center mt-5 mb-2 relative z-10">
                     <div className="bg-[#16161d] border border-white/5 rounded-full px-4 py-1.5 text-[9px] font-bold text-text-tertiary tracking-widest uppercase shadow-sm">
-                      Secure Connection Established
+                      RAG-POWERED · LIVE
                     </div>
                   </div>
 

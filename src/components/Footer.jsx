@@ -1,7 +1,134 @@
-import { useRef, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useRef, useEffect, useState } from 'react';
+import { ArrowRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { gsap, ScrollTrigger } from '../utils/gsap';
+
+// NOTE: This ngrok URL is temporary for development. 
+// UPDATE THIS before moving to production!
+const WEBHOOK_URL = "https://engraved-humongous-backboned.ngrok-free.dev/webhook/strategycall";
+
+function BookingForm() {
+  const [formData, setFormData] = useState({ name: '', email: '', preferredDate: '', preferredTime: '' });
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState('');
+  const shouldReduceMotion = useReducedMotion();
+
+  // date validation: don't allow past dates
+  const today = new Date().toISOString().split('T')[0];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          submittedAt: new Date().toISOString()
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to submit');
+      
+      setStatus('success');
+      setFormData({ name: '', email: '', preferredDate: '', preferredTime: '' });
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+      setErrorMessage('Something went wrong — please try again or email us directly.');
+    }
+  };
+
+  const inputClasses = "w-full bg-[#16161d] border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-text-tertiary focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all";
+
+  return (
+    <motion.form 
+      onSubmit={handleSubmit}
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+      whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="w-full max-w-[600px] mt-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative z-20"
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+        <div className="flex flex-col gap-1.5 text-left">
+          <label className="text-[13px] font-bold text-text-secondary uppercase tracking-wider ml-1">Name</label>
+          <input 
+            type="text" 
+            required
+            value={formData.name}
+            onChange={e => setFormData({...formData, name: e.target.value})}
+            className={inputClasses}
+            placeholder="John Doe"
+          />
+        </div>
+        <div className="flex flex-col gap-1.5 text-left">
+          <label className="text-[13px] font-bold text-text-secondary uppercase tracking-wider ml-1">Email</label>
+          <input 
+            type="email" 
+            required
+            value={formData.email}
+            onChange={e => setFormData({...formData, email: e.target.value})}
+            className={inputClasses}
+            placeholder="john@company.com"
+          />
+        </div>
+        <div className="flex flex-col gap-1.5 text-left">
+          <label className="text-[13px] font-bold text-text-secondary uppercase tracking-wider ml-1">Preferred Date</label>
+          <input 
+            type="date" 
+            required
+            min={today}
+            value={formData.preferredDate}
+            onChange={e => setFormData({...formData, preferredDate: e.target.value})}
+            className={inputClasses + " [color-scheme:dark]"}
+          />
+        </div>
+        <div className="flex flex-col gap-1.5 text-left">
+          <label className="text-[13px] font-bold text-text-secondary uppercase tracking-wider ml-1">Preferred Time</label>
+          <input 
+            type="time" 
+            required
+            value={formData.preferredTime}
+            onChange={e => setFormData({...formData, preferredTime: e.target.value})}
+            className={inputClasses + " [color-scheme:dark]"}
+          />
+        </div>
+      </div>
+
+      {status === 'error' && (
+        <div className="mb-5 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm text-left">
+          <AlertCircle size={18} className="shrink-0" />
+          <p>{errorMessage}</p>
+        </div>
+      )}
+
+      {status === 'success' && (
+        <div className="mb-5 p-4 rounded-xl bg-[#39D98A]/10 border border-[#39D98A]/20 flex items-center gap-3 text-[#39D98A] text-sm text-left">
+          <CheckCircle2 size={18} className="shrink-0" />
+          <p>Thanks! We'll confirm your call time shortly.</p>
+        </div>
+      )}
+
+      <motion.button 
+        type="submit"
+        disabled={status === 'loading'}
+        whileHover={shouldReduceMotion || status === 'loading' ? {} : { scale: 1.02 }}
+        whileTap={shouldReduceMotion || status === 'loading' ? {} : { scale: 0.98 }}
+        className="w-full h-[56px] flex items-center justify-center gap-2 rounded-xl font-bold text-[1rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-[#1a0f00] hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] disabled:opacity-70 disabled:cursor-not-allowed"
+      >
+        {status === 'loading' ? (
+          <><Loader2 size={18} className="animate-spin" /> Booking...</>
+        ) : (
+          <>Book Strategy Call <ArrowRight size={18} /></>
+        )}
+      </motion.button>
+    </motion.form>
+  );
+}
 
 
 export default function Footer() {
@@ -82,27 +209,7 @@ export default function Footer() {
             Book a free strategy call. We'll map your current tools, find the bottlenecks, and show you exactly what a custom AI system could look like for your business.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-            {/* Primary Button */}
-            <motion.a 
-              href="#cta" 
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
-              className="inline-flex items-center justify-center gap-2 h-[56px] px-10 rounded-xl font-bold text-[1rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)] w-full sm:w-auto"
-            >
-              Book a Free Strategy Call <ArrowRight size={18} />
-            </motion.a>
-            
-            {/* Secondary Button */}
-            <motion.a 
-              href="#systems" 
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
-              className="inline-flex items-center justify-center gap-2 h-[56px] px-10 rounded-xl font-medium text-[1rem] bg-white/5 backdrop-blur-md border border-white/10 text-text-primary hover:bg-white/10 smooth-transition shadow-[0_4px_20px_rgba(0,0,0,0.2)] w-full sm:w-auto"
-            >
-              See What We Build
-            </motion.a>
-          </div>
+          <BookingForm />
         </div>
       </section>
 
