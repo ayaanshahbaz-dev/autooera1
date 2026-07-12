@@ -1,19 +1,19 @@
 import { useRef, useEffect } from 'react';
 import { Check, Star, ArrowRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Pricing() {
   const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const tiers = [
     {
       id: 'starter',
       name: 'AI Starter System',
       desc: 'For businesses that need their first AI touchpoint — a chat assistant that qualifies and responds.',
-      price: '$1,200', // PLACEHOLDER_PRICING
+      price: '$1,200',
       features: [
         'AI chat widget (AURA-lite)',
         'Lead qualification via chat',
@@ -136,7 +136,7 @@ export default function Pricing() {
           {tiers.map((tier) => (
             <div 
               key={tier.id}
-              className={`pricing-card glass-card w-full rounded-[24px] p-8 md:p-10 flex flex-col relative group transition-all duration-300 ${
+              className={`pricing-card glass-card w-full rounded-[24px] p-8 md:p-10 flex flex-col relative group smooth-transition ${
                 tier.isPopular 
                   ? 'is-popular border-accent/40 shadow-[0_0_40px_rgba(255,149,0,0.1)] hover:border-accent/60 hover:shadow-[0_0_50px_rgba(255,149,0,0.15)] z-10 scale-[1.02] lg:scale-[1.05]' 
                   : 'border-white/5 hover:border-white/20'
@@ -182,20 +182,24 @@ export default function Pricing() {
               {/* CTA Button */}
               {tier.isPopular ? (
                 // Primary Gradient Button
-                <a 
+                <motion.a 
                   href="#cta" 
-                  className="mt-auto w-full inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] transition-colors shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+                  className="mt-auto w-full inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)]"
                 >
                   {tier.ctaText}
-                </a>
+                </motion.a>
               ) : (
                 // Secondary Hollow Button
-                <a 
+                <motion.a 
                   href="#cta" 
-                  className="mt-auto w-full inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-medium text-[0.95rem] bg-white/5 backdrop-blur-md border border-white/10 text-text-primary hover:bg-white/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+                  className="mt-auto w-full inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-medium text-[0.95rem] bg-white/5 backdrop-blur-md border border-white/10 text-text-primary hover:bg-white/10 smooth-transition shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
                 >
                   {tier.ctaText}
-                </a>
+                </motion.a>
               )}
 
             </div>

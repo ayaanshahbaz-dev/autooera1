@@ -1,9 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { AlertTriangle, Inbox, Clock, ArrowRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Problem() {
   const sectionRef = useRef(null);
@@ -96,7 +94,7 @@ export default function Problem() {
             return (
               <div 
                 key={i}
-                className="problem-card-ref bg-[#121217] border border-white/5 rounded-2xl p-8 flex flex-col gap-5 hover:bg-[#15151a] hover:border-white/10 transition-colors"
+                className="problem-card-ref glass-card p-8 flex flex-col gap-5"
               >
                 <div className="w-10 h-10 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-center">
                   <Icon size={18} className={problem.iconColor} />

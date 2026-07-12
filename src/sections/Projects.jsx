@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react';
 import { ArrowRight, CircleDashed, CheckCircle2, ChevronRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const projects = [
     // Top 2 Large Cards
@@ -160,12 +160,14 @@ export default function Projects() {
 
         {/* CTA Button */}
         <div className="mt-20 flex justify-center w-full">
-          <a 
+          <motion.a 
             href="#cases" 
-            className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] transition-colors shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+            className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
           >
             View Case Studies <ArrowRight size={16} />
-          </a>
+          </motion.a>
         </div>
 
       </div>
@@ -177,7 +179,7 @@ function ProjectCard({ project }) {
   const isConcept = project.status === 'Concept';
   
   return (
-    <div className="project-card glass-card w-full rounded-2xl overflow-hidden flex flex-col group hover:scale-[1.02] hover:border-accent/30 hover:shadow-[0_10px_40px_rgba(255,149,0,0.08)] transition-all duration-300">
+    <div className="project-card glass-card w-full rounded-2xl overflow-hidden flex flex-col group hover:scale-[1.02] hover:border-accent/30 hover:shadow-[0_10px_40px_rgba(255,149,0,0.08)] smooth-transition">
       
       {/* Thumbnail (Browser Mockup) */}
       <div className={`w-full h-[200px] md:h-[240px] bg-gradient-to-br ${project.gradient} relative overflow-hidden flex flex-col p-4 md:p-6`}>

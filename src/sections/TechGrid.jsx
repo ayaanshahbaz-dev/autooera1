@@ -1,31 +1,29 @@
 import { useEffect, useRef } from 'react';
 import { 
-  Globe, Code, Box, Layers, Bot, Sparkles, Zap, 
-  Workflow, CreditCard, Table, Database, Plug, Paintbrush, Cloud 
+  Workflow, Monitor, Terminal, Zap, Database, Sparkles, Bot, 
+  Layers, Server, Box, Plug, Network, CreditCard, Table 
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function TechGrid() {
   const sectionRef = useRef(null);
 
   const tools = [
-    { name: 'WordPress', icon: Globe },
-    { name: 'Next.js', icon: Code },
-    { name: 'React', icon: Box },
-    { name: 'GoHighLevel', icon: Layers },
-    { name: 'AI Agents', icon: Bot },
+    { name: 'n8n', icon: Workflow },
+    { name: 'Django', icon: Monitor },
+    { name: 'Python', icon: Terminal },
+    { name: 'FastAPI', icon: Zap },
+    { name: 'Supabase', icon: Database },
     { name: 'OpenAI', icon: Sparkles },
-    { name: 'Zapier', icon: Zap },
-    { name: 'Make', icon: Workflow },
+    { name: 'AI Agents', icon: Bot },
+    { name: 'GoHighLevel', icon: Layers },
+    { name: 'PostgreSQL', icon: Server },
+    { name: 'Docker', icon: Box },
+    { name: 'Zapier', icon: Plug },
+    { name: 'Make', icon: Network },
     { name: 'Stripe', icon: CreditCard },
     { name: 'Airtable', icon: Table },
-    { name: 'Supabase', icon: Database },
-    { name: 'APIs', icon: Plug },
-    { name: 'Framer', icon: Paintbrush },
-    { name: 'Cloud', icon: Cloud },
   ];
 
   useEffect(() => {
@@ -81,12 +79,12 @@ export default function TechGrid() {
             return (
               <div 
                 key={i} 
-                className="tech-card bg-[#0f0f13] border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:bg-[#15151a] hover:border-white/10 group cursor-default"
+                className="tech-card bg-[#0f0f13] border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 smooth-transition hover:scale-[1.02] hover:-translate-y-1 hover:bg-[#15151a] hover:border-accent/30 hover:shadow-[0_10px_40px_rgba(255,149,0,0.08)] group cursor-default"
               >
-                <div className="w-12 h-12 rounded-[14px] bg-white/[0.03] border border-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-300">
-                  <Icon size={20} className="text-text-secondary group-hover:text-accent transition-colors" strokeWidth={1.5} />
+                <div className="w-12 h-12 rounded-[14px] bg-white/[0.03] border border-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] smooth-transition">
+                  <Icon size={20} className="text-text-secondary group-hover:text-accent smooth-transition" strokeWidth={1.5} />
                 </div>
-                <span className="text-[0.75rem] font-bold text-text-secondary group-hover:text-text-primary transition-colors">
+                <span className="text-[0.75rem] font-bold text-text-secondary group-hover:text-text-primary smooth-transition">
                   {tool.name}
                 </span>
               </div>

@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO -->
@@ -10,6 +13,38 @@
     <meta name="description" content="AutoEra engineers custom AI systems — AI receptionists, lead automation, RAG-powered knowledge bases — that become part of how your business operates." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://autoera.site" />
+
+    <!-- SEO JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AutoEra",
+      "url": "https://autoera.site",
+      "logo": "https://autoera.site/favicon-32x32.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/autoera-automation"
+      ],
+      "description": "AutoEra is an AI engineering studio that designs, builds, and deploys intelligent business systems combining AI, automation, and custom software to solve real operational problems."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "AutoEra AI Engineering",
+      "provider": {
+        "@type": "Organization",
+        "name": "AutoEra"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Austin" },
+        { "@type": "City", "name": "Manchester" },
+        { "@type": "City", "name": "Sydney" }
+      ],
+      "description": "Custom AI systems, automation, and intelligent software engineering."
+    }
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:title" content="AutoEra — AI Systems for Growing Businesses" />
@@ -23,10 +58,14 @@
     <meta name="twitter:title" content="AutoEra — AI Systems for Growing Businesses" />
     <meta name="twitter:description" content="We engineer AI systems that answer calls, respond to leads, automate operations and become part of how your business runs." />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts — non-render-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+    </noscript>
   </head>
   <body class="antialiased selection:bg-[#FF9500]/20 selection:text-[#FF9500]">
     <div id="root"></div>

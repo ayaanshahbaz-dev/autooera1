@@ -1,17 +1,21 @@
+import { lazy, Suspense } from 'react';
 import Navigation from './components/Navigation';
-import Footer from './components/Footer';
 import Hero from './sections/Hero';
 import TechGrid from './sections/TechGrid';
-import Problem from './sections/Problem';
-import Systems from './sections/Systems';
-import ConnectedSystem from './sections/ConnectedSystem';
-import AutomationFlow from './sections/AutomationFlow';
-import Process from './sections/Process';
-import Projects from './sections/Projects';
-import Capabilities from './sections/Capabilities';
-import Pricing from './sections/Pricing';
-import Testimonials from './sections/Testimonials';
-import Faq from './sections/Faq';
+
+// Below-the-fold sections: code-split to reduce initial JS bundle
+const Problem = lazy(() => import('./sections/Problem'));
+const Systems = lazy(() => import('./sections/Systems'));
+const ConnectedSystem = lazy(() => import('./sections/ConnectedSystem'));
+const AutomationFlow = lazy(() => import('./sections/AutomationFlow'));
+const Process = lazy(() => import('./sections/Process'));
+const Projects = lazy(() => import('./sections/Projects'));
+const Capabilities = lazy(() => import('./sections/Capabilities'));
+const Pricing = lazy(() => import('./sections/Pricing'));
+const Testimonials = lazy(() => import('./sections/Testimonials'));
+const Faq = lazy(() => import('./sections/Faq'));
+const Footer = lazy(() => import('./components/Footer'));
+const ChatWidget = lazy(() => import('./components/ChatWidget'));
 
 function App() {
   return (
@@ -21,21 +25,27 @@ function App() {
       <main className="flex-1">
         <Hero />
         <TechGrid />
-        <Problem />
-        <Systems />
-        <ConnectedSystem />
-        <AutomationFlow />
-        <Process />
-        <Projects />
-        <Capabilities />
-        <Pricing />
-        <Testimonials />
-        <Faq />
+        <Suspense fallback={null}>
+          <Problem />
+          <Systems />
+          <ConnectedSystem />
+          <AutomationFlow />
+          <Process />
+          <Projects />
+          <Capabilities />
+          <Pricing />
+          <Testimonials />
+          <Faq />
+        </Suspense>
       </main>
       
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+        <ChatWidget />
+      </Suspense>
     </div>
   );
 }
 
 export default App;
+

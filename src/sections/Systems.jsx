@@ -3,24 +3,25 @@ import {
   Briefcase, FileText, Bot, Database, Zap, Plug, 
   MessageSquare, LayoutDashboard, Users, PhoneCall, ArrowRight 
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Systems() {
   const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const services = [
+//...
     // Top Row (Wide)
     {
       title: "AI Lead Management",
       desc: "Complete lead capture, scoring, and nurture pipelines that automatically engage prospects 24/7 without manual effort.",
       icon: Briefcase,
-      iconColor: "text-[#407BFF]",
-      iconBg: "bg-[#407BFF]/10",
+      iconColor: "text-[#FF9500]",
+      iconBg: "bg-[#FF9500]/10",
       badge: "MOST POPULAR",
-      badgeColor: "bg-[#407BFF]/10 text-[#407BFF]",
+      badgeColor: "bg-[#FF9500]/10 text-[#FF9500]",
       colSpan: "lg:col-span-2"
     },
     {
@@ -59,8 +60,8 @@ export default function Systems() {
       title: "API Integrations",
       desc: "Seamless connections between your legacy platforms and modern software.",
       icon: Plug,
-      iconColor: "text-[#00E5FF]",
-      iconBg: "bg-[#00E5FF]/10",
+      iconColor: "text-[#FFB340]",
+      iconBg: "bg-[#FFB340]/10",
     },
     {
       title: "Omnichannel Comms",
@@ -87,8 +88,8 @@ export default function Systems() {
       title: "Voice AI Assistants",
       desc: "Human-sounding AI voice agents for inbound routing and outbound qualification.",
       icon: PhoneCall,
-      iconColor: "text-[#407BFF]",
-      iconBg: "bg-[#407BFF]/10",
+      iconColor: "text-[#FF9500]",
+      iconBg: "bg-[#FF9500]/10",
     }
   ];
 
@@ -128,6 +129,8 @@ export default function Systems() {
       }, sectionRef);
 
       return () => ctx.revert();
+    } else {
+      gsap.set('.services-heading, .service-card', { opacity: 1, y: 0 });
     }
   }, []);
 
@@ -137,9 +140,14 @@ export default function Systems() {
       ref={sectionRef}
       className="py-32 bg-bg-primary border-y border-white/5 relative overflow-hidden flex flex-col items-center"
     >
-      <div className="container max-w-[1200px] flex flex-col items-center">
+      {/* Static Background Glow */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,149,0,0.08)_0%,transparent_70%)] blur-[100px]" />
+      </div>
+
+      <div className="container max-w-[1200px] flex flex-col items-center relative z-10">
         
-        <div className="services-heading text-center max-w-[800px] mx-auto mb-20 flex flex-col items-center">
+        <div className="services-heading opacity-0 translate-y-8 text-center max-w-[800px] mx-auto mb-20 flex flex-col items-center">
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
             <span className="text-[0.65rem] font-bold text-text-tertiary tracking-widest uppercase">WHAT WE BUILD</span>
@@ -150,8 +158,7 @@ export default function Systems() {
           </h2>
           
           <p className="text-[1.1rem] text-text-secondary max-w-[640px] leading-relaxed mx-auto">
-            From connected workflows to complex AI automation systems, we build everything 
-            your business needs to capture, convert, and scale.
+            AutoEra engineers and deploys custom AI systems, workflow automations, and intelligent infrastructure designed to solve real operational bottlenecks for growing businesses.
           </p>
         </div>
 
@@ -161,11 +168,11 @@ export default function Systems() {
             return (
               <div 
                 key={i}
-                className={`service-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:bg-[#15151a] hover:border-white/10 transition-colors ${service.colSpan || ''}`}
+                className={`service-card opacity-0 translate-y-8 glass-card p-7 flex flex-col ${service.colSpan || ''}`}
               >
                 <div className="flex items-center gap-3 mb-5">
                   <div className={`w-12 h-12 rounded-[14px] ${service.iconBg} flex items-center justify-center shrink-0`}>
-                    <Icon size={22} className={service.iconColor} strokeWidth={1.5} />
+                    <Icon size={22} className={service.iconColor} strokeWidth={1.5} aria-hidden="true" />
                   </div>
                   
                   <div className="flex flex-col items-start gap-1">
@@ -188,12 +195,14 @@ export default function Systems() {
           })}
         </div>
         
-        <a 
+        <motion.a 
           href="#cta" 
-          className="inline-flex items-center justify-center gap-2 h-[48px] px-8 rounded-lg font-bold text-[0.9rem] bg-[#407BFF] text-white hover:bg-[#5088ff] transition-colors shadow-[0_0_20px_rgba(64,123,255,0.3)]"
+          whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+          whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+          className="inline-flex items-center justify-center gap-2 h-[48px] px-8 rounded-lg font-bold text-[0.9rem] bg-[#FF9500] text-black hover:bg-[#FFB340] smooth-transition hover:shadow-[0_0_24px_rgba(255,149,0,0.4)] shadow-[0_0_10px_rgba(255,149,0,0.1)]"
         >
           Discuss Your Project <ArrowRight size={16} />
-        </a>
+        </motion.a>
 
       </div>
     </section>

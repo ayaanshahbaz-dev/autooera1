@@ -34,10 +34,17 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </React.StrictMode>,
-);
+import { ViteReactSSG } from 'vite-react-ssg';
+
+const routes = [
+  {
+    path: '/',
+    element: (
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    )
+  }
+];
+
+export const createRoot = ViteReactSSG({ routes });

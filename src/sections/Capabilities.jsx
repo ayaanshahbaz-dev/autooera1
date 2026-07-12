@@ -1,9 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Clock, Zap, Smartphone, Link, UserX, BarChart3 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Capabilities() {
   const sectionRef = useRef(null);
@@ -131,11 +129,11 @@ export default function Capabilities() {
             return (
               <div 
                 key={cap.id} 
-                className="capability-card glass-card w-full p-8 flex flex-col items-center text-center group transition-all duration-300 hover:border-accent/30 hover:shadow-[0_10px_40px_rgba(255,149,0,0.06)]"
+                className="capability-card glass-card w-full p-8 flex flex-col items-center text-center group smooth-transition hover:border-accent/30 hover:shadow-[0_10px_40px_rgba(255,149,0,0.06)]"
               >
                 
                 {/* Icon Wrapper */}
-                <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-accent/20 transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-accent/20 smooth-transition">
                   <Icon size={22} className="text-accent" />
                 </div>
 

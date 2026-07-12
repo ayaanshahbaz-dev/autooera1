@@ -1,13 +1,13 @@
 import { useRef, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const ctaRef = useRef(null);
   const footerRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
   const year = new Date().getFullYear();
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function Footer() {
         className="w-full py-40 relative overflow-hidden flex flex-col items-center"
       >
         {/* Parallax Glowing Orb */}
-        <div className="cta-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,149,0,0.06)_0%,transparent_60%)] pointer-events-none" />
+        <div className="cta-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(255,149,0,0.08)_0%,transparent_60%)] pointer-events-none" />
         
         <div className="container max-w-[900px] flex flex-col items-center text-center px-4 relative z-10 final-cta-content">
           <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] text-white font-heading font-bold tracking-tight leading-[1.05] mb-6">
@@ -84,20 +84,24 @@ export default function Footer() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
             {/* Primary Button */}
-            <a 
+            <motion.a 
               href="#cta" 
-              className="inline-flex items-center justify-center gap-2 h-[56px] px-10 rounded-xl font-bold text-[1rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] transition-colors shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)] w-full sm:w-auto"
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 h-[56px] px-10 rounded-xl font-bold text-[1rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)] w-full sm:w-auto"
             >
               Book a Free Strategy Call <ArrowRight size={18} />
-            </a>
+            </motion.a>
             
             {/* Secondary Button */}
-            <a 
+            <motion.a 
               href="#systems" 
-              className="inline-flex items-center justify-center gap-2 h-[56px] px-10 rounded-xl font-medium text-[1rem] bg-white/5 backdrop-blur-md border border-white/10 text-text-primary hover:bg-white/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.2)] w-full sm:w-auto"
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 h-[56px] px-10 rounded-xl font-medium text-[1rem] bg-white/5 backdrop-blur-md border border-white/10 text-text-primary hover:bg-white/10 smooth-transition shadow-[0_4px_20px_rgba(0,0,0,0.2)] w-full sm:w-auto"
             >
               See What We Build
-            </a>
+            </motion.a>
           </div>
         </div>
       </section>
@@ -110,7 +114,7 @@ export default function Footer() {
             {/* Col 1: Logo */}
             <div className="flex flex-col gap-6">
               <a href="#" aria-label="AutoEra Engineering Studio">
-                <svg viewBox="0 0 176 38" fill="none" className="h-7 w-auto">
+                <svg viewBox="0 0 176 38" fill="none" className="h-7 w-auto" aria-hidden="true">
                   <text x="0" y="28" className="font-sans font-bold text-[32px] tracking-tight fill-text-primary">Auto</text>
                   <path d="M86 4 L76 21 H82 L74 36 L86 19 H80 L86 4Z" fill="var(--accent)" strokeLinejoin="round" />
                   <text x="94" y="28" className="font-sans font-bold text-[32px] tracking-tight fill-text-primary">Era</text>
@@ -125,21 +129,29 @@ export default function Footer() {
             <div className="flex flex-col">
               <h4 className="text-sm font-bold mb-6 text-text-primary uppercase tracking-wider">Explore</h4>
               <nav className="flex flex-col gap-4">
-                <a href="#systems" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">Systems</a>
-                <a href="#process" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">Process</a>
-                <a href="#projects" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">Real Projects</a>
-                <a href="#pricing" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">Pricing</a>
-                <a href="#faq" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">FAQ</a>
+                <a href="#systems" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Systems</a>
+                <a href="#process" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Process</a>
+                <a href="#projects" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Real Projects</a>
+                <a href="#pricing" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Pricing</a>
+                <a href="#faq" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">FAQ</a>
               </nav>
             </div>
 
             {/* Col 3: Connect */}
             <div className="flex flex-col">
               <h4 className="text-sm font-bold mb-6 text-text-primary uppercase tracking-wider">Connect</h4>
-              <nav className="flex flex-col gap-4">
-                <a href="mailto:engineering@autoera.site" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">engineering@autoera.site</a>
-                <a href="#cta" className="text-[0.95rem] text-text-secondary hover:text-accent transition-colors">Book a Call</a>
+              <nav className="flex flex-col gap-4 mb-6">
+                <a href="mailto:hello.autoera@gmail.com" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">hello.autoera@gmail.com</a>
+                <a href="#cta" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Book a Call</a>
               </nav>
+              
+              <h4 className="text-[0.75rem] font-bold mb-4 text-text-primary uppercase tracking-wider">Socials</h4>
+              <div className="flex items-center gap-4">
+                <a href="https://www.linkedin.com/company/autoera-automation" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-accent smooth-transition" aria-label="LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                {/* Future socials can be added here seamlessly */}
+              </div>
             </div>
           </div>
 

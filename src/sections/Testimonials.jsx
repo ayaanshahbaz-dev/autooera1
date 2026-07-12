@@ -118,7 +118,7 @@ export default function Testimonials() {
           {marqueeItems.map((review, idx) => (
             <div 
               key={idx} 
-              className="glass-card w-[350px] md:w-[400px] shrink-0 p-8 rounded-2xl flex flex-col relative opacity-85 transition-opacity duration-300 hover:opacity-100"
+              className="glass-card w-[350px] md:w-[400px] shrink-0 p-8 rounded-2xl flex flex-col relative opacity-85 smooth-transition hover:opacity-100"
             >
 
               {/* Stars */}

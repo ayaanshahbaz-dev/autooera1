@@ -4,13 +4,13 @@ import {
   Calendar, LayoutDashboard, GitMerge, Users, 
   CheckCircle2, ArrowRight, User, Bot, Database
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function ConnectedSystem() {
   const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -93,7 +93,7 @@ export default function ConnectedSystem() {
         <div className="cs-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full mb-16">
           
           {/* 1. AI Chat Widget (Larger) */}
-          <div className="cs-card lg:col-span-2 bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden relative">
+          <div className="cs-card lg:col-span-2 glass-card p-7 flex flex-col group overflow-hidden relative">
             <div className="flex items-center gap-2 mb-6">
               <MessageSquare size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">AI Chat Widget</h3>
@@ -136,7 +136,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 2. Lead Qualification */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <UserCheck size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">Lead Qualification</h3>
@@ -158,7 +158,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 3. Pipeline Sync */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <Activity size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">Pipeline Sync</h3>
@@ -181,7 +181,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 4. AI Follow-Up */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <Zap size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">AI Follow-Up</h3>
@@ -200,7 +200,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 5. WhatsApp & Email Automation */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <Mail size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">WhatsApp & Email</h3>
@@ -224,7 +224,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 6. Calendar Sync */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <Calendar size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">Calendar Sync</h3>
@@ -241,7 +241,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 7. Owner Dashboard */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <LayoutDashboard size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">Owner Dashboard</h3>
@@ -268,7 +268,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 8. n8n Workflow Engine */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col hover:border-accent/30 hover:shadow-[0_0_30px_rgba(255,149,0,0.05)] transition-all group overflow-hidden">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <GitMerge size={18} className="text-accent" />
               <h3 className="font-bold text-text-primary text-[1.05rem]">n8n Workflow Engine</h3>
@@ -291,7 +291,7 @@ export default function ConnectedSystem() {
           </div>
 
           {/* 9. Client Portal */}
-          <div className="cs-card bg-[#121217] border border-white/5 rounded-2xl p-7 flex flex-col transition-all group overflow-hidden opacity-70">
+          <div className="cs-card glass-card p-7 flex flex-col group overflow-hidden opacity-70">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <Users size={18} className="text-accent" />
@@ -310,12 +310,14 @@ export default function ConnectedSystem() {
 
         {/* Bottom CTA */}
         <div className="cs-cta flex justify-center mt-6">
-          <a 
+          <motion.a 
             href="#cta" 
-            className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] transition-colors shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+            className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
           >
             Book a Free Strategy Call <ArrowRight size={16} />
-          </a>
+          </motion.a>
         </div>
 
       </div>

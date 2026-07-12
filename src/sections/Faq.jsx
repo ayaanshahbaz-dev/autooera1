@@ -1,43 +1,41 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
   {
-    q: "What AI models do you use?",
-    a: "We use OpenAI, Gemini, and open-source models via OpenRouter depending on the use case. For retrieval-augmented generation (RAG), we pair LLMs with a vector database so responses stay grounded in your actual business documentation, not generic guesses."
+    q: "What does an AI engineering studio do?",
+    a: "An AI engineering studio designs and builds custom artificial intelligence systems and automations for businesses. AutoEra specifically engineers AI receptionists, lead management pipelines, and intelligent operational infrastructure."
   },
   {
-    q: "How do your integrations work?",
-    a: "We build middleware using Python/FastAPI or n8n — hosted on secure infrastructure. Every integration uses strict API contracts and webhooks with retry logic. No fragile Zapier pipes."
+    q: "How is AutoEra different from an automation agency?",
+    a: "AutoEra is an engineering studio that builds robust, scalable software systems rather than relying on fragile no-code pipes. We deliver custom API middleware, Dockerized microservices, and dedicated databases that you fully own."
   },
   {
-    q: "Is the architecture scalable?",
-    a: "Yes. Our backend services are stateless and containerised via Docker. PostgreSQL is our primary data store and scales independently from the application layer."
+    q: "What AI models does AutoEra use?",
+    a: "AutoEra uses models from OpenAI, Anthropic, Google Gemini, and open-source alternatives depending on the specific business requirement. We integrate these models with vector databases for Retrieval-Augmented Generation (RAG) to ensure accuracy."
   },
   {
-    q: "Can it connect to our existing systems?",
-    a: "If your legacy system has a REST API, SOAP interface, or direct database access, we can connect to it. If not, we can engineer custom bridges."
+    q: "Can AutoEra integrate AI with my existing business systems?",
+    a: "Yes, AutoEra can integrate custom AI systems with your existing software as long as there is a REST API, SOAP interface, or direct database access. We engineer custom middleware bridges to connect legacy platforms securely."
   },
   {
-    q: "Do you provide the source code?",
-    a: "Yes. Upon final deployment you receive full ownership — complete codebase, Dockerfiles, environment configs, and technical documentation. No lock-in."
+    q: "Who owns the code when working with AutoEra?",
+    a: "You receive full ownership of the source code upon final deployment. AutoEra provides the complete codebase, Dockerfiles, environment configurations, and technical documentation to ensure no vendor lock-in."
   },
   {
-    q: "How long does a system take to build?",
-    a: "A foundational system typically takes 6-12 weeks depending on scope. We work in two-week sprints, so you see progress immediately, not at the end."
+    q: "How long does it take AutoEra to build a custom AI system?",
+    a: "It typically takes AutoEra 6 to 12 weeks to build and deploy a foundational AI system, depending on the project scope. We deliver functional milestones every two weeks during the engineering process."
   },
   {
-    q: "What's the cost?",
-    a: "See the Pricing section above — every project is scoped individually based on complexity, with final numbers confirmed on your discovery call."
+    q: "How much does a custom AI system from AutoEra cost?",
+    a: "The cost of a custom AI system depends entirely on the technical complexity and scope of the project. Every project is scoped individually during a discovery call."
   },
   {
-    q: "Do you work with businesses outside the US?",
-    a: "Yes. Our systems are location-agnostic. We currently work with businesses in Austin, Manchester, and Sydney."
+    q: "Where is AutoEra located and do they work internationally?",
+    a: "AutoEra operates globally and works with businesses internationally. We currently have active projects with clients based in Austin, Manchester, and Sydney."
   }
 ];
 
@@ -144,7 +142,7 @@ function AccordionItem({ faq, isOpen, onToggle }) {
 
   return (
     <details
-      className="faq-item glass-card rounded-[16px] overflow-hidden group transition-colors duration-300 border border-white/5 hover:border-white/10 [&_summary::-webkit-details-marker]:hidden"
+      className="faq-item glass-card rounded-[16px] overflow-hidden group smooth-transition [&_summary::-webkit-details-marker]:hidden"
       open={isOpen || isRendering}
       onClick={(e) => {
         e.preventDefault(); // Stop native immediate toggle
@@ -152,13 +150,14 @@ function AccordionItem({ faq, isOpen, onToggle }) {
       }}
     >
       <summary className="list-none flex items-center justify-between p-6 cursor-pointer select-none outline-none">
-        <h3 className={`font-bold pr-8 transition-colors duration-300 ${isOpen ? 'text-accent' : 'text-text-primary group-hover:text-accent'}`}>
+        <h3 className={`font-bold pr-8 smooth-transition ${isOpen ? 'text-accent' : 'text-text-primary group-hover:text-accent'}`}>
           {faq.q}
         </h3>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${isOpen ? 'bg-accent/20 border-accent/30' : 'bg-white/5 border border-white/10 group-hover:border-accent/30'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 smooth-transition ${isOpen ? 'bg-accent/20 border-accent/30' : 'bg-white/5 border border-white/10 group-hover:border-accent/30'}`}>
           <ChevronDown 
             size={16} 
-            className={`transition-transform duration-300 ${isOpen ? 'rotate-180 text-accent' : 'text-text-secondary group-hover:text-accent'}`} 
+            className={`smooth-transition ${isOpen ? 'rotate-180 text-accent' : 'text-text-secondary group-hover:text-accent'}`} 
+            aria-hidden="true"
           />
         </div>
       </summary>

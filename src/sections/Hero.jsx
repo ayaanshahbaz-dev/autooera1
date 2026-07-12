@@ -1,10 +1,8 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { ArrowRight, Bot, Database, Zap, Clock, Activity, CheckCircle2, ChevronRight, User, LineChart, BarChart } from 'lucide-react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 function DashboardMockup() {
   return (
@@ -69,30 +67,30 @@ function DashboardMockup() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div className="bg-[#121217] border border-white/5 rounded-xl p-6 flex flex-col justify-center relative overflow-hidden">
               <div className="flex items-center justify-between text-text-tertiary mb-3">
-                <User size={18} />
+                <Bot size={18} />
                 <span className="text-xs text-[#27C93F] font-bold flex items-center gap-1">↗ +24%</span>
               </div>
-              <div className="text-3xl font-heading font-bold text-text-primary">2,847</div>
-              <div className="text-[0.75rem] text-text-secondary mt-1">Leads Captured</div>
+              <div className="text-3xl font-heading font-bold text-text-primary">3,492</div>
+              <div className="text-[0.75rem] text-text-secondary mt-1">Conversations Handled</div>
             </div>
             
             <div className="bg-[#121217] border border-white/5 rounded-xl p-6 flex flex-col justify-center">
               <div className="flex items-center justify-between text-text-tertiary mb-3">
-                <span className="text-lg font-serif italic">$</span>
-                <span className="text-xs text-[#27C93F] font-bold flex items-center gap-1">↗ +18%</span>
+                <Clock size={18} />
+                <span className="text-xs text-[#27C93F] font-bold flex items-center gap-1">↗ 40%</span>
               </div>
-              <div className="text-3xl font-heading font-bold text-text-primary">$184K</div>
-              <div className="text-[0.75rem] text-text-secondary mt-1">Revenue Pipeline</div>
+              <div className="text-3xl font-heading font-bold text-text-primary">2.4m</div>
+              <div className="text-[0.75rem] text-text-secondary mt-1">Avg Response Time</div>
             </div>
             
             <div className="bg-[#121217] border border-white/5 rounded-xl p-6 flex flex-col justify-center relative">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,149,0,0.1)_0%,transparent_50%)]" />
               <div className="flex items-center justify-between text-text-tertiary mb-3 relative z-10">
-                <LineChart size={18} />
+                <CheckCircle2 size={18} />
                 <span className="text-xs text-[#27C93F] font-bold flex items-center gap-1">↗ 8.2%</span>
               </div>
-              <div className="text-3xl font-heading font-bold text-text-primary relative z-10">12.4%</div>
-              <div className="text-[0.75rem] text-text-secondary mt-1 relative z-10">Conversion Rate</div>
+              <div className="text-3xl font-heading font-bold text-text-primary relative z-10">68%</div>
+              <div className="text-[0.75rem] text-text-secondary mt-1 relative z-10">Leads Qualified</div>
             </div>
           </div>
 
@@ -101,16 +99,16 @@ function DashboardMockup() {
             {/* Pipeline Chart area */}
             <div className="bg-[#121217] border border-white/5 rounded-xl p-6 flex-1">
               <div className="flex items-center justify-between mb-8 text-[0.85rem] font-bold text-text-primary">
-                <span className="flex items-center gap-2"><Activity size={16} className="text-accent" /> CRM Pipeline</span>
+                <span className="flex items-center gap-2"><Activity size={16} className="text-accent" /> AI Qualification Funnel</span>
                 <span className="flex items-center gap-2 text-xs text-[#27C93F]"><span className="w-1.5 h-1.5 rounded-full bg-[#27C93F] animate-pulse" /> Live</span>
               </div>
               
               <div className="flex flex-col gap-5">
                 {[
-                  { label: 'New Leads', value: 48, width: '90%', color: 'bg-[#407BFF]' },
-                  { label: 'Qualified', value: 32, width: '65%', color: 'bg-accent' },
-                  { label: 'Proposal Sent', value: 18, width: '40%', color: 'bg-[#00E5FF]' },
-                  { label: 'Closed Won', value: 12, width: '25%', color: 'bg-[#27C93F]' },
+                  { label: 'New', value: 142, width: '90%', color: 'bg-[#FF9500]' },
+                  { label: 'Qualified', value: 96, width: '68%', color: 'bg-accent' },
+                  { label: 'Booked', value: 42, width: '30%', color: 'bg-[#FFB340]' },
+                  { label: 'Follow-up', value: 54, width: '38%', color: 'bg-[#27C93F]' },
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col gap-2">
                     <div className="flex justify-between text-[0.75rem] text-text-secondary">
@@ -133,10 +131,10 @@ function DashboardMockup() {
               
               <div className="flex flex-col gap-6">
                 {[
-                  { icon: CheckCircle2, color: 'text-[#27C93F]', title: 'New lead qualified', sub: '2s ago' },
-                  { icon: User, color: 'text-[#407BFF]', title: 'Call booked — Dr. Smith', sub: '1m ago' },
-                  { icon: Zap, color: 'text-accent', title: 'Workflow triggered', sub: '3m ago' },
-                  { icon: Database, color: 'text-[#27C93F]', title: 'Invoice paid — $2,400', sub: '8m ago' },
+                  { icon: CheckCircle2, color: 'text-[#27C93F]', title: 'AURA qualified a lead', sub: '2s ago' },
+                  { icon: User, color: 'text-[#FF9500]', title: 'Call booked via AURA', sub: '1m ago' },
+                  { icon: Zap, color: 'text-accent', title: 'Follow-up sent automatically', sub: '3m ago' },
+                  { icon: Database, color: 'text-[#27C93F]', title: 'Knowledge base updated', sub: '8m ago' },
                 ].map((event, i) => (
                   <div key={i} className="flex gap-4 items-center">
                     <event.icon size={16} className={event.color} />
@@ -151,9 +149,9 @@ function DashboardMockup() {
           {/* Bottom Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {[
-              { icon: BarChart, label: 'Traffic', value: '4.2K', sub: 'This Month' },
-              { icon: Clock, label: 'Bookings', value: '14', sub: 'This Week' },
-              { icon: Zap, label: 'Automations', value: '38', sub: 'Active' },
+              { icon: Activity, label: 'Active Sessions', value: '42', sub: 'This Month' },
+              { icon: Clock, label: 'Calls Booked', value: '14', sub: 'This Week' },
+              { icon: Zap, label: 'Automations Fired', value: '840', sub: 'Today' },
               { icon: Clock, label: 'Avg Response', value: '2.4m', sub: 'AI Follow-up' },
             ].map((stat, i) => (
               <div key={i} className="bg-[#121217] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center text-center">
@@ -178,10 +176,47 @@ function DashboardMockup() {
 export default function Hero() {
   const sectionRef = useRef(null);
   const headlineRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
   
   // Floating icons refs
   const floatIcon1 = useRef(null);
   const floatIcon2 = useRef(null);
+  const floatIcon3 = useRef(null);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { damping: 25, stiffness: 150 });
+  const smoothY = useSpring(mouseY, { damping: 25, stiffness: 150 });
+  const clientPos = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+
+    const updateMousePosition = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      mouseX.set(clientPos.current.x - rect.left);
+      mouseY.set(clientPos.current.y - rect.top);
+    };
+
+    const handleMouseMove = (e) => {
+      clientPos.current.x = e.clientX;
+      clientPos.current.y = e.clientY;
+      updateMousePosition();
+    };
+
+    const handleScroll = () => {
+      updateMousePosition();
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [shouldReduceMotion, mouseX, mouseY]);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -231,6 +266,16 @@ export default function Hero() {
           ease: 'sine.inOut',
           delay: 1
         });
+        
+        gsap.to(floatIcon3.current, {
+          y: -15,
+          rotation: 8,
+          duration: 4.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: 0.5
+        });
 
       }, sectionRef);
 
@@ -241,7 +286,7 @@ export default function Hero() {
     }
   }, []);
 
-  const headlineText = "Your business runs on AI — whether you've built it yet or not.";
+  const headlineText = "We Engineer Intelligent Systems Your Business Runs On.";
 
   return (
     <section 
@@ -251,21 +296,44 @@ export default function Hero() {
     >
       {/* Background Radial Gradient Wash */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,149,0,0.06)_0%,rgba(10,10,15,1)_60%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(255,149,0,0.12)_0%,transparent_70%)] opacity-80" />
       </div>
+
+      {/* Mouse Follow Glow */}
+      {!shouldReduceMotion && (
+        <motion.div
+          className="absolute pointer-events-none z-0 mix-blend-screen left-0 top-0"
+          style={{
+            left: smoothX,
+            top: smoothY,
+            x: '-50%',
+            y: '-50%',
+            width: 400,
+            height: 400,
+            background: 'radial-gradient(circle, rgba(255,149,0,0.12) 0%, transparent 60%)',
+            filter: 'blur(40px)',
+          }}
+        />
+      )}
 
       {/* Floating Background Icons */}
       <div 
         ref={floatIcon1}
-        className="absolute top-[25%] left-[10%] xl:left-[15%] p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-md opacity-30 hidden md:block z-0 pointer-events-none"
+        className="absolute top-[25%] left-[10%] xl:left-[15%] p-4 rounded-2xl bg-accent/[0.04] border border-accent/40 backdrop-blur-md opacity-100 hidden md:block z-0 pointer-events-none shadow-[0_0_30px_rgba(255,149,0,0.25)]"
       >
-        <Bot size={24} className="text-accent" />
+        <Bot size={28} className="text-accent" aria-hidden="true" />
       </div>
       <div 
         ref={floatIcon2}
-        className="absolute top-[45%] right-[10%] xl:right-[15%] p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-md opacity-30 hidden md:block z-0 pointer-events-none"
+        className="absolute top-[45%] right-[10%] xl:right-[15%] p-4 rounded-2xl bg-accent/[0.04] border border-accent/40 backdrop-blur-md opacity-100 hidden md:block z-0 pointer-events-none shadow-[0_0_30px_rgba(255,149,0,0.25)]"
       >
-        <Database size={24} className="text-text-tertiary" />
+        <Database size={28} className="text-accent" aria-hidden="true" />
+      </div>
+      <div 
+        ref={floatIcon3}
+        className="absolute top-[20%] right-[12%] xl:right-[18%] p-3 rounded-xl bg-accent/[0.04] border border-accent/40 backdrop-blur-md opacity-100 hidden md:block z-0 pointer-events-none shadow-[0_0_20px_rgba(255,149,0,0.2)]"
+      >
+        <Zap size={20} className="text-accent" aria-hidden="true" />
       </div>
 
       <div className="container max-w-[1300px] relative z-10 flex flex-col items-center text-center">
@@ -274,38 +342,47 @@ export default function Hero() {
         <div className="max-w-[840px] flex flex-col items-center">
           <div className="hero-pill opacity-0 translate-y-4 inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)] rounded-full px-4 py-1.5 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_8px_var(--color-accent-glow)] animate-[pulseDot_2s_infinite]" />
-            <span className="text-[0.78rem] font-semibold text-text-primary tracking-[0.06em] uppercase drop-shadow-sm">Now accepting Q3 projects</span>
+            <span className="text-[0.78rem] font-semibold text-text-primary tracking-[0.06em] uppercase drop-shadow-sm">Built By An Engineer, Not An Agency</span>
           </div>
           
           <h1 
             ref={headlineRef}
             className="text-[clamp(3rem,6vw,5.5rem)] mb-7 leading-[1.05] tracking-tighter font-heading font-bold"
           >
-            {headlineText.split(' ').map((word, i) => (
-              <span key={i} className="inline-block overflow-hidden">
-                <span className="word inline-block opacity-0 translate-y-8">{word}</span>
-                {i !== headlineText.split(' ').length - 1 && '\u00A0'}
-              </span>
-            ))}
+            {headlineText.split(' ').map((word, i) => {
+              const isGradient = word === 'Intelligent' || word === 'Systems';
+              return (
+                <span key={i} className="inline-block overflow-hidden">
+                  <span className={`word inline-block opacity-0 translate-y-8 ${isGradient ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#FFB340] to-[#FF9500]' : ''}`}>
+                    {word}
+                  </span>
+                  {i !== headlineText.split(' ').length - 1 && '\u00A0'}
+                </span>
+              );
+            })}
           </h1>
           
           <p className="hero-subtext opacity-0 translate-y-4 text-[1.15rem] text-text-secondary max-w-[640px] mb-10 leading-relaxed mx-auto">
-            AutoEra engineers AI systems that answer your calls, respond to your leads, and automate what's slowing your team down — so you can focus on running your business.
+            AutoEra is an AI engineering studio that designs, builds, and deploys intelligent business systems combining AI, automation, and custom software to solve real operational problems.
           </p>
           
           <div className="hero-ctas opacity-0 translate-y-4 flex justify-center gap-4 flex-wrap mb-10">
-            <a 
+            <motion.a 
               href="#cta" 
-              className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] transition-colors shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-r from-[#FF9500] to-[#FFB340] text-[#1a0f00] smooth-transition shadow-[0_0_30px_rgba(255,149,0,0.5),inset_0_2px_3px_rgba(255,255,255,0.6)] hover:shadow-[0_0_50px_rgba(255,149,0,0.7),inset_0_2px_4px_rgba(255,255,255,0.8)]"
             >
               Book a Free Strategy Call <ArrowRight size={16} />
-            </a>
-            <a 
+            </motion.a>
+            <motion.a 
               href="#systems" 
-              className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-medium text-[0.95rem] bg-white/5 backdrop-blur-md border border-white/10 text-text-primary hover:bg-white/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-transparent border border-accent/40 text-accent hover:bg-accent hover:border-accent hover:text-black smooth-transition shadow-[0_0_15px_rgba(255,149,0,0.1)] hover:shadow-[0_0_24px_rgba(255,149,0,0.3)]"
             >
               See What We Build
-            </a>
+            </motion.a>
           </div>
         </div>
 

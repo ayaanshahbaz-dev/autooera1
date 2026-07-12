@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react';
 import { Compass, PencilRuler, Zap, Rocket, ArrowRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Process() {
   const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const steps = [
     {
@@ -135,7 +135,7 @@ export default function Process() {
                 <div key={index} className="process-step group flex flex-col items-center">
                   
                   {/* Icon Node */}
-                  <div className="process-node relative shrink-0 w-[88px] h-[88px] rounded-2xl bg-gradient-to-br from-[#FFB340] to-[#FF9500] flex items-center justify-center shadow-[0_0_30px_rgba(255,149,0,0.3)] mb-8 group-hover:scale-110 transition-transform duration-300">
+                  <div className="process-node relative shrink-0 w-[88px] h-[88px] rounded-2xl bg-gradient-to-br from-[#FFB340] to-[#FF9500] flex items-center justify-center shadow-[0_0_30px_rgba(255,149,0,0.3)] mb-8 group-hover:scale-110 smooth-transition">
                     <Icon size={36} className="text-white" />
                     
                     {/* Number Badge */}
@@ -145,10 +145,10 @@ export default function Process() {
                   </div>
 
                   {/* Step Card */}
-                  <div className="process-card glass-card w-full h-full p-6 relative overflow-hidden transition-all duration-300 flex flex-col items-center text-center group-hover:bg-white/[0.05] group-hover:scale-[1.03] group-hover:shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-                    <h3 className="text-text-primary font-bold text-[1.05rem] mb-3 group-hover:text-accent transition-colors">{step.title}</h3>
+                  <div className="process-card glass-card w-full h-full p-6 relative overflow-hidden smooth-transition flex flex-col items-center text-center group-hover:bg-white/[0.05] group-hover:scale-[1.03] group-hover:shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+                    <h3 className="text-text-primary font-bold text-[1.05rem] mb-3 group-hover:text-accent smooth-transition">{step.title}</h3>
                     <p className="text-[0.85rem] text-text-secondary leading-relaxed">{step.desc}</p>
-                    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#FFB340] to-[#FF9500] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#FFB340] to-[#FF9500] transform scale-x-0 group-hover:scale-x-100 smooth-transition origin-center" />
                   </div>
                   
                 </div>
@@ -159,12 +159,14 @@ export default function Process() {
 
         {/* CTA Button */}
         <div className="mt-20 flex justify-center w-full">
-          <a 
+          <motion.a 
             href="#cta" 
-            className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] transition-colors shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+            className="inline-flex items-center justify-center gap-2 h-[52px] px-9 rounded-lg font-bold text-[0.95rem] bg-gradient-to-b from-[#FFB340] to-[#FF9500] text-black hover:from-[#FFC366] hover:to-[#FF9500] smooth-transition shadow-[0_0_24px_rgba(255,149,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)] hover:shadow-[0_0_32px_rgba(255,149,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]"
           >
             Book a Free Strategy Call <ArrowRight size={16} />
-          </a>
+          </motion.a>
         </div>
 
       </div>

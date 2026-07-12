@@ -3,24 +3,22 @@ import {
   Globe, MessageSquare, BrainCircuit, Network, 
   Calendar, CalendarCheck, Database, UserCheck 
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '../utils/gsap';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function AutomationFlow() {
   const sectionRef = useRef(null);
   const timelineRef = useRef(null);
 
   const steps = [
-    { id: 1, title: 'Visitor Lands on Website', desc: 'AURA greets them instantly via chat widget.', icon: Globe, color: '#407BFF' },
-    { id: 2, title: 'Visitor Asks a Question', desc: "AURA answers using AutoEra's knowledge base.", icon: MessageSquare, color: '#00E5FF' },
+    { id: 1, title: 'Visitor Lands on Website', desc: 'AURA greets them instantly via chat widget.', icon: Globe, color: '#FF9500' },
+    { id: 2, title: 'Visitor Asks a Question', desc: "AURA answers using AutoEra's knowledge base.", icon: MessageSquare, color: '#FFB340' },
     { id: 3, title: 'AURA Qualifies the Lead', desc: 'Understands their business, goals, and challenges.', icon: BrainCircuit, color: '#8A2BE2' },
     { id: 4, title: 'AURA Recommends a System', desc: 'Matches them to the right AI solution based on what they actually need.', icon: Network, color: '#27C93F' },
     { id: 5, title: 'Calendar Check', desc: 'AURA checks real-time Google Calendar availability.', icon: Calendar, color: '#FFBD2E' },
     { id: 6, title: 'Call Gets Booked', desc: 'Qualified lead books a discovery call directly, no back-and-forth.', icon: CalendarCheck, color: '#FF3366' },
-    { id: 7, title: 'Lead Info Stored', desc: 'Details saved automatically for follow-up.', icon: Database, color: '#407BFF' },
-    { id: 8, title: 'Founder Follows Up', desc: 'You show up to the call already knowing their business.', icon: UserCheck, color: '#00E5FF' }
+    { id: 7, title: 'Lead Info Stored', desc: 'Details saved automatically for follow-up.', icon: Database, color: '#FF9500' },
+    { id: 8, title: 'Founder Follows Up', desc: 'You show up to the call already knowing their business.', icon: UserCheck, color: '#FFB340' }
   ];
 
   useEffect(() => {
@@ -105,17 +103,17 @@ export default function AutomationFlow() {
         {/* Section Header */}
         <div className="flow-heading text-center max-w-[800px] mx-auto mb-20 flex flex-col items-center">
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_rgba(0,229,255,0.4)]" />
-            <span className="text-[0.65rem] font-bold text-[#00E5FF] tracking-widest uppercase">HOW IT WORKS TOGETHER</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB340] shadow-[0_0_8px_rgba(255,179,64,0.4)]" />
+            <span className="text-[0.65rem] font-bold text-[#FFB340] tracking-widest uppercase">HOW IT WORKS TOGETHER</span>
           </div>
 
           <h2 className="text-[clamp(2.5rem,4.5vw,3.5rem)] mb-6 text-white font-heading font-bold tracking-tight leading-[1.1]">
             Your Complete Business<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#407BFF] to-[#00E5FF]">Automation Flow</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9500] to-[#FFB340]">Automation Flow</span>
           </h2>
           
           <p className="text-[1rem] text-text-secondary max-w-[640px] leading-relaxed mx-auto">
-            See how every piece connects — from first visit to closed deal — all automated, all tracked, all managed.
+            See how every lead moves through the system — from first visit to booked call — all automated, all tracked, nothing missed.
           </p>
         </div>
 
@@ -152,13 +150,13 @@ export default function AutomationFlow() {
                   {/* Left Spacer / Card */}
                   <div className={`w-full md:w-[calc(50%-60px)] flex ${isEven ? 'md:justify-end' : 'md:justify-start hidden md:flex'}`}>
                     {isEven && (
-                      <div className="step-card bg-[#121217] border border-white/5 rounded-2xl w-full max-w-[460px] flex flex-row items-center justify-between p-5 px-6 group hover:border-white/10 transition-all duration-300">
+                      <div className="step-card bg-[#121217] border border-white/5 rounded-2xl w-full max-w-[460px] flex flex-row items-center justify-between p-5 px-6 group hover:border-white/10 smooth-transition">
                         <div className="flex flex-col gap-1 pr-5 md:text-right text-left flex-1">
                           <h3 className="font-bold text-text-primary text-[1.05rem]">{step.title}</h3>
                           <p className="text-[0.8rem] text-text-secondary leading-relaxed">{step.desc}</p>
                         </div>
                         <div 
-                          className="w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 transition-all duration-300" 
+                          className="w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 smooth-transition" 
                           style={{ color: step.color, backgroundColor: `${step.color}15`, borderColor: `${step.color}30` }}
                         >
                           <Icon size={20} />
@@ -170,9 +168,9 @@ export default function AutomationFlow() {
                   {/* Right Spacer / Card */}
                   <div className={`w-full md:w-[calc(50%-60px)] flex ${!isEven ? 'md:justify-start' : 'md:justify-end hidden md:flex'}`}>
                     {!isEven && (
-                      <div className="step-card bg-[#121217] border border-white/5 rounded-2xl w-full max-w-[460px] flex flex-row items-center justify-between p-5 px-6 group hover:border-white/10 transition-all duration-300">
+                      <div className="step-card bg-[#121217] border border-white/5 rounded-2xl w-full max-w-[460px] flex flex-row items-center justify-between p-5 px-6 group hover:border-white/10 smooth-transition">
                         <div 
-                          className="w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 transition-all duration-300" 
+                          className="w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 smooth-transition" 
                           style={{ color: step.color, backgroundColor: `${step.color}15`, borderColor: `${step.color}30` }}
                         >
                           <Icon size={20} />
