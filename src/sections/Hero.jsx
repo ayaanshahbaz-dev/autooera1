@@ -352,7 +352,7 @@ export default function Hero() {
             {headlineText.split(' ').map((word, i) => {
               const isGradient = word === 'Intelligent' || word === 'Systems';
               return (
-                <span key={i} className="inline-block overflow-hidden">
+                <span key={i} className="inline-block overflow-hidden px-2 -mx-2 pb-2 -mb-2">
                   <span className={`word inline-block opacity-0 translate-y-8 ${isGradient ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#FFB340] to-[#FF9500]' : ''}`}>
                     {word}
                   </span>
