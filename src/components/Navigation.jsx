@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Bell, Check, Sparkles, Bot, Calendar } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-export default function Navigation() {
+export default function Navigation({ insightsPage = false }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -23,9 +24,17 @@ export default function Navigation() {
     { name: 'Systems', path: '#systems' },
     { name: 'Process', path: '#process' },
     { name: 'Projects', path: '#projects' },
+    { name: 'Insights', path: '/insights', isRoute: true },
     { name: 'Pricing', path: '#pricing' },
     { name: 'FAQ', path: '#faq' },
   ];
+
+  // When on an insight page, anchor links must point back to the homepage
+  const resolveHref = (link) => {
+    if (link.isRoute) return link.path;
+    if (insightsPage) return `/${link.path}`; // e.g. /#systems
+    return link.path;
+  };
 
   const notifications = [
     {
@@ -86,7 +95,11 @@ export default function Navigation() {
       <nav className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-24px)] md:w-[95%] max-w-[1000px] z-50 h-[68px] rounded-[34px] bg-[#111116]/80 backdrop-blur-xl border border-white/5 shadow-[0_24px_50px_rgba(0,0,0,0.4)] px-4 md:px-6 flex items-center justify-between transition-all">
         
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 text-white group" aria-label="AutoEra">
+        <a
+          href={insightsPage ? '/' : '#'}
+          className="flex items-center gap-3 text-white group"
+          aria-label="AutoEra"
+        >
           <div className="w-[34px] h-[34px] rounded-xl bg-gradient-to-br from-[#FFB340] to-[#FF9500] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(255,149,0,0.3)] group-hover:scale-105 transition-transform">
             <svg viewBox="0 0 24 32" fill="none" className="h-[18px] w-auto">
               <path d="M14 0 L2 18 H10 L8 32 L22 14 H14 L14 0Z" fill="#1a0f00" strokeLinejoin="round" />
@@ -97,15 +110,26 @@ export default function Navigation() {
 
         {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-7">
-          {links.map(({ name, path }) => (
-            <a
-              key={name}
-              href={path}
-              className="text-[14px] font-semibold text-text-secondary hover:text-white smooth-transition tracking-tight"
-            >
-              {name}
-            </a>
-          ))}
+          {links.map((link) => {
+            const href = resolveHref(link);
+            return link.isRoute ? (
+              <Link
+                key={link.name}
+                to={href}
+                className="text-[14px] font-semibold text-text-secondary hover:text-white smooth-transition tracking-tight"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={href}
+                className="text-[14px] font-semibold text-text-secondary hover:text-white smooth-transition tracking-tight"
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </div>
 
         {/* Right Actions */}
@@ -229,19 +253,37 @@ export default function Navigation() {
             className="fixed inset-0 top-[88px] bg-[#0A0A0F]/95 backdrop-blur-2xl p-6 flex flex-col gap-6 z-40 border-t border-white/10"
           >
             <div className="flex flex-col gap-6 pt-6">
-              {links.map(({ name, path }, i) => (
-                <motion.a 
-                  key={name} 
-                  href={path} 
-                  onClick={() => setMobileOpen(false)}
-                  initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
-                  animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + (i * 0.05), duration: 0.2 }}
-                  className="text-[28px] font-heading font-bold text-white hover:text-accent smooth-transition tracking-tight"
-                >
-                  {name}
-                </motion.a>
-              ))}
+              {links.map((link, i) => {
+                const href = resolveHref(link);
+                return link.isRoute ? (
+                  <motion.div
+                    key={link.name}
+                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
+                    animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.2 }}
+                  >
+                    <Link
+                      to={href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block text-[28px] font-heading font-bold text-white hover:text-accent smooth-transition tracking-tight"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    key={link.name}
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
+                    animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.2 }}
+                    className="text-[28px] font-heading font-bold text-white hover:text-accent smooth-transition tracking-tight"
+                  >
+                    {link.name}
+                  </motion.a>
+                );
+              })}
             </div>
             
             <div className="mt-auto pb-10">

@@ -239,6 +239,7 @@ export default function Footer() {
                 <a href="#systems" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Systems</a>
                 <a href="#process" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Process</a>
                 <a href="#projects" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Real Projects</a>
+                <a href="/insights" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Insights</a>
                 <a href="#pricing" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">Pricing</a>
                 <a href="#faq" className="text-[0.95rem] text-text-secondary hover:text-accent smooth-transition">FAQ</a>
               </nav>

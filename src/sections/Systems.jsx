@@ -12,11 +12,10 @@ export default function Systems() {
   const shouldReduceMotion = useReducedMotion();
 
   const services = [
-//...
     // Top Row (Wide)
     {
-      title: "AI Lead Management",
-      desc: "Complete lead capture, scoring, and nurture pipelines that automatically engage prospects 24/7 without manual effort.",
+      title: "AI Lead Management System",
+      desc: "Our AI Lead Management System captures, scores, and nurtures prospects automatically — 24/7 lead engagement, qualification, and CRM entry without manual effort.",
       icon: Briefcase,
       iconColor: "text-[#FF9500]",
       iconBg: "bg-[#FF9500]/10",
@@ -25,8 +24,8 @@ export default function Systems() {
       colSpan: "lg:col-span-2"
     },
     {
-      title: "Document Intelligence",
-      desc: "Turn messy paperwork, PDFs, and emails into structured data. Automated extraction, routing, and CRM entry.",
+      title: "Internal Knowledge Assistant",
+      desc: "A Retrieval-Augmented Generation (RAG) powered Internal Knowledge Assistant that gives your team instant, accurate answers from your own docs, SOPs, and data — no hallucinations.",
       icon: FileText,
       iconColor: "text-[#8A2BE2]",
       iconBg: "bg-[#8A2BE2]/10",
@@ -34,8 +33,8 @@ export default function Systems() {
     },
     // Standard Grid
     {
-      title: "AI Chatbots & Agents",
-      desc: "Intelligent assistants that qualify leads, answer questions, and automate conversations.",
+      title: "Customer Support AI Agent",
+      desc: "A dedicated Customer Support AI Agent that handles inbound queries, resolves tickets autonomously, and routes complex issues — slashing response times around the clock.",
       icon: Bot,
       iconColor: "text-[#FF9500]",
       iconBg: "bg-[#FF9500]/10",
@@ -43,50 +42,50 @@ export default function Systems() {
       badgeColor: "bg-[#FF9500]/10 text-[#FF9500]",
     },
     {
-      title: "CRM Architecture",
-      desc: "Custom CRM builds with automated pipelines to manage your entire sales process.",
+      title: "CRM Automation",
+      desc: "End-to-end CRM Automation: custom pipelines, automated stage updates, and omni-channel data syncing so your CRM stays current with zero manual data entry.",
       icon: Database,
       iconColor: "text-[#FF5F56]",
       iconBg: "bg-[#FF5F56]/10",
     },
     {
       title: "Workflow Automation",
-      desc: "Automated workflows connecting your tools, reducing manual work, and speeding up processes.",
+      desc: "Workflow Automation that connects your entire tool stack — triggers, conditions, multi-step logic — eliminating repetitive manual work across your operations.",
       icon: Zap,
       iconColor: "text-[#27C93F]",
       iconBg: "bg-[#27C93F]/10",
     },
     {
-      title: "API Integrations",
-      desc: "Seamless connections between your legacy platforms and modern software.",
+      title: "MCP Integrations",
+      desc: "Model Context Protocol (MCP) Integrations that give AI agents live, structured access to your business systems — CRMs, databases, and APIs — for real-time decision making.",
       icon: Plug,
       iconColor: "text-[#FFB340]",
       iconBg: "bg-[#FFB340]/10",
     },
     {
-      title: "Omnichannel Comms",
-      desc: "Unified inbox syncing SMS, Email, and social channels into one dashboard.",
+      title: "Sales Qualification Agent",
+      desc: "An AI Sales Qualification Agent that engages inbound leads across SMS, email, and chat — scoring intent, asking discovery questions, and booking only the most qualified calls.",
       icon: MessageSquare,
       iconColor: "text-[#FF3366]",
       iconBg: "bg-[#FF3366]/10",
     },
     {
       title: "Operations Dashboards",
-      desc: "Custom admin panels to track metrics, manage operations, and control systems.",
+      desc: "Custom admin panels to track metrics, manage operations, and monitor your AI systems in real time.",
       icon: LayoutDashboard,
       iconColor: "text-[#9D4EDD]",
       iconBg: "bg-[#9D4EDD]/10",
     },
     {
       title: "Client Portals",
-      desc: "Secure portals where clients can track projects, access resources, and upload files.",
+      desc: "Secure portals where clients can track projects, access resources, and upload files — all connected to your backend systems.",
       icon: Users,
       iconColor: "text-[#FFBD2E]",
       iconBg: "bg-[#FFBD2E]/10",
     },
     {
-      title: "Voice AI Assistants",
-      desc: "Human-sounding AI voice agents for inbound routing and outbound qualification.",
+      title: "AI Voice Agent",
+      desc: "A human-sounding AI Voice Agent that handles inbound call routing, answers FAQs, and runs outbound qualification calls — without a human on the line.",
       icon: PhoneCall,
       iconColor: "text-[#FF9500]",
       iconBg: "bg-[#FF9500]/10",

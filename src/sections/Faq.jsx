@@ -6,8 +6,12 @@ import { gsap, ScrollTrigger } from '../utils/gsap';
 
 const faqs = [
   {
+    q: "What kinds of AI agents does AutoEra build?",
+    a: "AutoEra engineers several specific types of AI agents: an AI Lead Management System that captures and qualifies prospects automatically; a Customer Support AI Agent that handles inbound queries and ticket routing; a Sales Qualification Agent that scores leads and books discovery calls; an Internal Knowledge Assistant powered by RAG that answers team questions from your own documents; and an AI Voice Agent for inbound call routing and outbound qualification. Each is built as production-grade software, not no-code templates."
+  },
+  {
     q: "What does an AI engineering studio do?",
-    a: "An AI engineering studio designs and builds custom artificial intelligence systems and automations for businesses. AutoEra specifically engineers AI receptionists, lead management pipelines, and intelligent operational infrastructure."
+    a: "An AI engineering studio designs and builds custom artificial intelligence systems and automations for businesses. AutoEra specifically engineers AI receptionists, AI Lead Management Systems, Customer Support AI Agents, and intelligent operational infrastructure."
   },
   {
     q: "How is AutoEra different from an automation agency?",
@@ -15,7 +19,7 @@ const faqs = [
   },
   {
     q: "What AI models does AutoEra use?",
-    a: "AutoEra uses models from OpenAI, Anthropic, Google Gemini, and open-source alternatives depending on the specific business requirement. We integrate these models with vector databases for Retrieval-Augmented Generation (RAG) to ensure accuracy."
+    a: "AutoEra uses models from OpenAI, Anthropic, Google Gemini, and open-source alternatives depending on the specific business requirement. We integrate these models with vector databases for Retrieval-Augmented Generation (RAG) to ensure accuracy, and connect them to live business systems via Model Context Protocol (MCP) Integrations for real-time data access."
   },
   {
     q: "Can AutoEra integrate AI with my existing business systems?",

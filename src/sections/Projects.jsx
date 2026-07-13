@@ -12,10 +12,10 @@ export default function Projects() {
     // Top 2 Large Cards
     {
       id: 1,
-      category: 'AI CONSULTANT · RAG',
+      category: 'INTERNAL KNOWLEDGE ASSISTANT · RAG · MCP',
       title: 'AURA',
-      desc: 'RAG-powered AI consultant that qualifies leads, recommends solutions, and books discovery calls automatically.',
-      tags: ['RAG', 'n8n', 'OpenRouter', 'Google Calendar'],
+      desc: 'RAG-powered Internal Knowledge Assistant and Sales Qualification Agent built for AutoEra. Uses Retrieval-Augmented Generation to pull accurate context, MCP Integrations to connect live business data, then qualifies leads and books discovery calls automatically.',
+      tags: ['RAG', 'MCP Integrations', 'n8n', 'OpenRouter', 'Google Calendar'],
       status: 'Production',
       gradient: 'from-[#FF9500] to-[#E65C00]',
       size: 'large'
@@ -43,10 +43,10 @@ export default function Projects() {
     },
     {
       id: 4,
-      category: 'CRM INTEGRATION',
+      category: 'CRM AUTOMATION',
       title: 'Automated CRM Lead Pipeline',
-      desc: 'Captures omni-channel leads, cleans data, and updates CRM stages with zero manual input.',
-      tags: ['n8n', 'CRM Integrations', 'Webhooks'],
+      desc: 'CRM Automation pipeline that captures omni-channel leads via the AI Lead Management System, cleans data, and updates CRM stages with zero manual input.',
+      tags: ['n8n', 'CRM Automation', 'Webhooks'],
       status: 'Built',
       gradient: 'from-[#F39C12] to-[#E67E22]',
       size: 'small'
@@ -63,10 +63,10 @@ export default function Projects() {
     },
     {
       id: 6,
-      category: 'SUPPORT AUTOMATION',
+      category: 'CUSTOMER SUPPORT AI AGENT',
       title: 'AI Customer Support Automation',
-      desc: 'Processes incoming queries via webhook, generating smart AI responses and routing complex tickets automatically.',
-      tags: ['n8n', 'OpenAI', 'API'],
+      desc: 'Customer Support AI Agent that processes inbound queries via webhook, generates contextual AI responses, and routes complex tickets to the right team automatically.',
+      tags: ['n8n', 'OpenAI', 'Workflow Automation'],
       status: 'Built',
       gradient: 'from-[#FFD54F] to-[#FF8F00]',
       size: 'small'

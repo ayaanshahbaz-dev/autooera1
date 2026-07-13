@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import InsightsIndex from './insights/InsightsIndex.jsx';
+import ArticlePage from './insights/ArticlePage.jsx';
 import './index.css';
 
 class ErrorBoundary extends React.Component {
@@ -43,8 +45,16 @@ const routes = [
       <ErrorBoundary>
         <App />
       </ErrorBoundary>
-    )
-  }
+    ),
+  },
+  {
+    path: '/insights',
+    element: <InsightsIndex />,
+  },
+  {
+    path: '/insights/:slug',
+    element: <ArticlePage />,
+  },
 ];
 
 export const createRoot = ViteReactSSG({ routes });
